@@ -21,26 +21,25 @@ import {NgxPipesLiteModule} from "ngx-pipes-lite";
 
 ## Pipes
 
-### json$
+### get$
 
-Simple http GET request pipe for angular template, display the ajax result quickly and lightly.
+Simple **http GET request pipe** for angular template, display the ajax result quickly and lightly.
 
-The result is a wrapper(`Observable<Result>`) of your result from the api.
-**Result**: `{success: boolean, data?: any | any[], message: string, isNotEmpty: boolean}`
+The result is a wrapper(`Observable<Result>`) of your result from the api, **SO `get$` always work with `async` pipe**.
+**Result**: `Observable<{success: boolean, data?: any | any[], message: string, valid: boolean}>`
 **Result#data**: your actual result.
 **Result#valid**: `result.data` is not `null`, `undefined`, `length > 0`(array) and `{field:...}`(object).
 
-**Usage:** `string | json$:{args}?:{headers}?`
+**Usage:** `string | get$:{args}?:{headers}?`
 
-**With args**
-
-```typescript
-'api' | json$:{a:1,b:2} // actual request: api?a=1&b=2
-'api' | json$:{a:1,b:2}:{Authorization:xxx} // actual request: api?a=1&b=2 with header {Authorization: xxx}
+```javascript
+'api' | get$ // actual request: api
+'api' | get$:{a:1,b:2} // actual request: api?a=1&b=2
+'api' | get$:{a:1,b:2}:{Authorization:xxx} // actual request: api?a=1&b=2 with header {Authorization: xxx}
 ```
 
-```html
-<ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | json$ | async as result">
+```angular2html
+<ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
   <ng-container *ngIf="result.valid">
     <p *ngFor="let item of result.data">
       {{item.title}}
@@ -56,3 +55,14 @@ The result is a wrapper(`Observable<Result>`) of your result from the api.
 -->
 ```
 
+### trunc
+
+Truncate the long text.
+
+**Usage:** `string | trunc:length?=15: replace?='...'`
+
+```html
+<p>{{'1234567890abcdef' | trunc}} <!-- string: 1234567890abcde... --></p>
+<p>{{'abcde' | trunc:3}} <!-- string: tru... --></p>
+<p>{{'abcde' | trunc:3:*}} <!-- string: tru* --></p>
+```
