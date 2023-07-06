@@ -59,7 +59,7 @@ The result is a wrapper(`Observable<Result>`) of your result from the api, **SO 
 
 Truncate the long text.
 
-**Usage:** `string | trunc:length?=15: replace?='...'`
+**Usage:** `string | trunc:length?=15:replace?='...'`
 
 ```html
 <p>{{'1234567890abcdef' | trunc}}</p> 
