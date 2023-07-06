@@ -62,7 +62,27 @@ Truncate the long text.
 **Usage:** `string | trunc:length?=15: replace?='...'`
 
 ```html
-<p>{{'1234567890abcdef' | trunc}} <!-- string: 1234567890abcde... --></p>
-<p>{{'abcde' | trunc:3}} <!-- string: tru... --></p>
-<p>{{'abcde' | trunc:3:*}} <!-- string: tru* --></p>
+<p>{{'1234567890abcdef' | trunc}}</p> 
+<!-- string: 1234567890abcde... -->
+
+<p>{{'abcde' | trunc:3}}</p> 
+<!-- string: tru... -->
+
+<p>{{'abcde' | trunc:3:*}}</p> 
+<!-- string: tru* -->
 ```
+
+### paging
+
+Simple array data paging pipe.
+
+**Usage:** `[] | paging:page?=1:size?=10`
+
+```html
+<p>{{[1,2,3,4,5,6,7,8,9,10] | paging}}</p> 
+<!-- Array: [1,2,3,4,5,6,7,8,9,10] -->
+
+<p>{{[1,2,3,4,5,6,7,8,9,10] | paging:2:3}}</p> 
+<!-- Array: [4,5,6] -->
+```
+
