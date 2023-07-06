@@ -2,6 +2,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 /**
  * truncate long text.
+ * @usageNotes
+ * `string | trunc:length?=15:replace?='...'`
  */
 @Pipe({
   name: 'trunc'

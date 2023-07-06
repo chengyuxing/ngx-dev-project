@@ -43,8 +43,6 @@ export class ResultWrapper {
 /**
  * Simple http GET request pipe for angular template, display the ajax result quickly and lightly.
  *
- * `Syntax: string | get$:{args}?:{headers}?`
- *
  * ### Notice:
  * The result is a wrapper(Observable<Result>) of your result from the api.
  *
@@ -55,6 +53,7 @@ export class ResultWrapper {
  * Result#valid: `result.data` is not `null`, `undefined`, `length > 0`(array) and `{field:...}`(object).
  *
  * @usageNotes
+ * `string | get$:{args}?:{headers}?`
  * #### With args
  * ```javascript
  * 'api' | get$:{a:1,b:2} // actual request: api?a=1&b=2
