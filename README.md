@@ -1,5 +1,7 @@
 # NgxDevProject
 
-Angular version14+ extension development project.
+Angular version14+ library development project.
 
 ### [ngx-pipes-lite](projects/ngx-pipes-lite/README.md)
+
+Some useful pipes.
