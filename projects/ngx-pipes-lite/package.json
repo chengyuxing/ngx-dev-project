@@ -1,0 +1,27 @@
+{
+  "name": "ngx-pipes-lite",
+  "version": "1.0.0",
+  "author": "chengyuxing",
+  "description": "Useful pipes for angular14+",
+  "license": "MIT",
+  "keywords": [
+    "ngx",
+    "angular",
+    "pipes",
+    "filters",
+    "ajax",
+    "http",
+    "angular pipe",
+    "angular filter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "peerDependencies": {
+    "@angular/common": ">=14",
+    "@angular/core": ">=14",
+    "rxjs": "^6.5.3 || ^7.4.0"
+  },
+  "sideEffects": false
+}
