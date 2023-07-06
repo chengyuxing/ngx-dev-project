@@ -1,4 +1,4 @@
-# Ngx Dev Project
+# Angular Library Dev Project
 
 Angular version14+ library development project.
 
