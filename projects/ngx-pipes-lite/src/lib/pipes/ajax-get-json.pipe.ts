@@ -3,11 +3,20 @@ import {catchError, map, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 /**
- * json$ pipe result wrapper.
+ * get$ pipe result wrapper.
  */
 export class ResultWrapper {
+  /**
+   * is request server success.
+   */
   readonly success: boolean = false;
+  /**
+   * requested raw data
+   */
   readonly data?: any | any[];
+  /**
+   * request state message.
+   */
   readonly message?: string;
 
   constructor(success: boolean, data: any | any[], message: string) {
@@ -17,7 +26,8 @@ export class ResultWrapper {
   }
 
   /**
-   * if ajax request result is empty or null returns false, else returns true.
+   * if ajax request result is not null and type is array(length > 0) or object(keys.length > 0)
+   * return true, otherwise return false.
    */
   get valid(): boolean {
     if (this.data) {
@@ -33,12 +43,12 @@ export class ResultWrapper {
 /**
  * Simple http GET request pipe for angular template, display the ajax result quickly and lightly.
  *
- * `Syntax: string | json$:{args}?:{headers}?`
+ * `Syntax: string | get$:{args}?:{headers}?`
  *
  * ### Notice:
  * The result is a wrapper(Observable<Result>) of your result from the api.
  *
- * Result: `{success: boolean, data?: any | any[], message: string, isNotEmpty: boolean}`
+ * Result: `{success: boolean, data?: any | any[], message: string, valid: boolean}`
  *
  * Result#data: your actual result.
  *
@@ -47,12 +57,12 @@ export class ResultWrapper {
  * @usageNotes
  * #### With args
  * ```javascript
- * 'api' | json$:{a:1,b:2} // actual request: api?a=1&b=2
- * 'api' | json$:{a:1,b:2}:{Authorization:xxx} // actual request: api?a=1&b=2 with header {Authorization: xxx}
+ * 'api' | get$:{a:1,b:2} // actual request: api?a=1&b=2
+ * 'api' | get$:{a:1,b:2}:{Authorization:xxx} // actual request: api?a=1&b=2 with header {Authorization: xxx}
  * ```
  * #### Example
  * ```html
- * <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | json$ | async as result">
+ * <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
  *   <ng-container *ngIf="result.valid">
  *     <p *ngFor="let item of result.data">
  *       {{item.title}}
@@ -63,7 +73,7 @@ export class ResultWrapper {
  * @see Result
  */
 @Pipe({
-  name: 'json$'
+  name: 'get$'
 })
 export class AjaxGetJsonPipe implements PipeTransform {
   constructor(private http: HttpClient) {

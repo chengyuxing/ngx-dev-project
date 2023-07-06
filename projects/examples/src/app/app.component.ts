@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
               <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
           </li>
       </ul>
-      <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | json$ | async as result">
+      <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
           <ng-container *ngIf="result.valid">
               <p *ngFor="let item of result.data">
                   {{item.title}}

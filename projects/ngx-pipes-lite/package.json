@@ -16,12 +16,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/chengyuxing/ngx-dev-project.git"
   },
+  "homepage": "https://github.com/chengyuxing/ngx-dev-project/blob/main/projects/ngx-pipes-lite/README.md",
   "peerDependencies": {
     "@angular/common": ">=14",
     "@angular/core": ">=14",
-    "rxjs": "^6.5.3 || ^7.4.0"
+    "rxjs": "^6.0.0 || ^7.0.0"
   },
   "sideEffects": false
 }
