@@ -9,7 +9,7 @@ export class ResultWrapper {
   /**
    * is request server success.
    */
-  readonly success: boolean = false;
+  readonly success: boolean = true;
   /**
    * requested raw data.
    */
