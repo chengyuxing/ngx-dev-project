@@ -26,8 +26,9 @@ export class ResultWrapper {
   }
 
   /**
-   * if ajax request result is not null and type is array(length > 0) or object(keys.length > 0)
-   * return true, otherwise return false.
+   * ajax request raw data is valid.
+   * - Array(length > 0) | Object(keys.length > 0): true
+   * - null | undefined | < 0: false
    */
   get valid(): boolean {
     if (this.data) {
@@ -38,26 +39,55 @@ export class ResultWrapper {
     }
     return false;
   }
+
+  /**
+   * get raw data length.
+   * - Array: length
+   * - Object: keys.length
+   * - otherwise: 0
+   */
+  get length(): number {
+    if (this.data) {
+      if (this.data instanceof Array) {
+        return this.data.length;
+      }
+      return Object.keys(this.data).length;
+    }
+    return 0;
+  }
+
+  /**
+   * Array only!
+   *
+   * get total pages of raw data by pageSize.
+   * @param size page size
+   */
+  pages(size: number): number {
+    if (this.data instanceof Array) {
+      return Math.floor(this.data.length / size) + 1;
+    }
+    return 0;
+  }
 }
 
 /**
- * Simple http GET request pipe for angular template, display the ajax result quickly and lightly.
+ * Simple http GET JSON request pipe for angular template, display the ajax result quickly and lightly.
  *
  * ### Notice:
- * The result is a wrapper(Observable<ResultWrapper>) of your result from the api.
+ * The result is a wrapper(Observable<ResultWrapper>) of your result from the api, SO `get$` always work with `async` pipe.
  *
- * ResultWrapper: `{success: boolean, data?: any | any[], message: string, valid: boolean}`
+ * ResultWrapper: `{success: boolean, data?: any | any[], message: string, valid: boolean, ...}`
  *
  * ResultWrapper#data: your actual result.
  *
- * ResultWrapper#valid: `result.data` is not `null`, `undefined`, `length > 0`(array) and `{field:...}`(object).
+ * ResultWrapper#valid: `result.data` is not `null`, `undefined`, `length > 0`(Array) and `keys.length > 0`(Object).
  *
  * @usageNotes
- * `string | get$:{args}?:{headers}?`
+ * `string | get$:{args}?:{options}?`
  * #### With args
  * ```javascript
  * 'api' | get$:{a:1,b:2} // actual request: api?a=1&b=2
- * 'api' | get$:{a:1,b:2}:{Authorization:xxx} // actual request: api?a=1&b=2 with header {Authorization: xxx}
+ * 'api' | get$:{a:1,b:2}:{headers:{Authorization:xxx}} // actual request: api?a=1&b=2 with header {Authorization: xxx}
  * ```
  * #### Example
  * ```html
@@ -79,16 +109,14 @@ export class AjaxGetJsonPipe implements PipeTransform {
   }
 
   /**
-   * Simple http GET request pipe.
+   * Simple http GET JSON request pipe.
    * @param url url
    * @param args request arguments
-   * @param headers http headers
+   * @param options options
    */
-  transform(url: string, args: { [index: string]: any } = {}, headers: {
-    [index: string]: string
-  } = {}): Observable<ResultWrapper> {
+  transform(url: string, args: { [index: string]: any } = {}, options: {} = {}): Observable<ResultWrapper> {
     const getUrl = Object.keys(args).length > 0 ? `${url}?${new URLSearchParams(args)}` : url;
-    return this.http.get(getUrl, {headers: headers}).pipe(
+    return this.http.get(getUrl, options).pipe(
       map(data => new ResultWrapper(true, data, 'requested!')),
       catchError(err => {
         console.error(err);
