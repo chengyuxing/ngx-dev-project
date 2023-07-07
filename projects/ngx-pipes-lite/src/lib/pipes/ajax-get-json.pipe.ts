@@ -1,7 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {catchError, map, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {PagingPipe} from "./paging.pipe";
 
 /**
  * get$ pipe result wrapper.
@@ -68,23 +67,6 @@ export class ResultWrapper {
       return Math.floor(this.data.length / size) + 1;
     }
     return 0;
-  }
-
-  /**
-   * Array only!
-   *
-   * do paging of raw data.
-   * @param page current page
-   * @param size page size
-   */
-  paging(page: number, size = 10): any[] {
-    if (this.data instanceof Array) {
-      const pagingPipe = new PagingPipe();
-      const pages = this.pages(size);
-      const currentPage = page >= pages ? pages : page;
-      return pagingPipe.transform(this.data, currentPage, size);
-    }
-    return [];
   }
 }
 
