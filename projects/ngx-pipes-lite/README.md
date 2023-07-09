@@ -2,6 +2,10 @@
 
 Useful pipes for angular v14+.
 
+## Try `get$` pipe.
+
+Open [get$ with paging](https://stackblitz.com/edit/stackblitz-starters-tpdzxg?file=src%2Fmain.ts) pipes demo preview.
+
 ## Installation
 
 1. Install: `npm i ngx-pipes-lite`

@@ -10,8 +10,8 @@ import {Component} from '@angular/core';
                   {{item.id}}. {{item.title | trunc:30}}
               </li>
           </ul>
-          <button (click)="prevPage()">Prev page</button>&nbsp;&nbsp;
-          <button (click)="nextPage(result.pages(10))">Next page</button>
+          <button (click)="prev()">Prev page</button>&nbsp;&nbsp;
+          <button (click)="next(result.pages(10))">Next page</button>
       </ng-container>
   `,
   styles: []
@@ -20,14 +20,14 @@ export class AppComponent {
   page = 1;
   url = 'https://jsonplaceholder.typicode.com/todos';
 
-  nextPage(pages: number) {
+  next(pages: number) {
     if (this.page >= pages) {
       return;
     }
     this.page += 1;
   }
 
-  prevPage() {
+  prev() {
     if (this.page <= 1) {
       return;
     }
