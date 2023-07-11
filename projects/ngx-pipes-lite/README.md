@@ -2,6 +2,8 @@
 
 Useful pipes for angular v14+.
 
+[Change notes](CHANGE_NOTES.md).
+
 ## Try `get$` pipe.
 
 Open [get$ with paging](https://stackblitz.com/edit/stackblitz-starters-tpdzxg?file=src%2Fmain.ts) pipes demo preview.
@@ -29,7 +31,8 @@ import {NgxPipesLiteModule} from "ngx-pipes-lite";
 
 Simple **http GET JSON request pipe** for angular template, display the ajax result quickly and lightly.
 
-The result is a wrapper(`Observable<ResultWrapper>`) of your result from the api, **SO `get$` always work with `async` pipe**.
+The result is a wrapper(`Observable<ResultWrapper>`) of your result from the api, **SO `get$` always work with `async`
+pipe**.
 **ResultWrapper**: `Observable<{success: boolean, data?: any | any[], message: string, valid: boolean}>`
 
 **ResultWrapper#data**: your actual result.
@@ -40,11 +43,30 @@ The result is a wrapper(`Observable<ResultWrapper>`) of your result from the api
 
 ```javascript
 'api' | get$ // actual request: api
-'api' | get$:{a:1,b:2} // actual request: api?a=1&b=2
-'api' | get$:{a:1,b:2}:{headers:{Authorization:'xxx'}} // actual request: api?a=1&b=2 with header {Authorization: xxx}
+'api' | get$
+:
+{
+  a:1, b
+:
+  2
+} // actual request: api?a=1&b=2
+'api' | get$
+:
+{
+  a:1, b
+:
+  2
+}
+:
+{
+  headers:{
+    Authorization:'xxx'
+  }
+} // actual request: api?a=1&b=2 with header {Authorization: xxx}
 ```
 
 ```angular2html
+
 <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
   <ul *ngIf="result.valid">
     <li *ngFor="let item of result.data">
@@ -68,13 +90,13 @@ Truncate the long text.
 **Usage:** `string | trunc:length?=15:replace?='...'`
 
 ```html
-<p>{{'1234567890abcdef' | trunc}}</p> 
+<p>{{'1234567890abcdef' | trunc}}</p>
 <!-- string: 1234567890abcde... -->
 
-<p>{{'abcde' | trunc:3}}</p> 
+<p>{{'abcde' | trunc:3}}</p>
 <!-- string: tru... -->
 
-<p>{{'abcde' | trunc:3:*}}</p> 
+<p>{{'abcde' | trunc:3:*}}</p>
 <!-- string: tru* -->
 ```
 
@@ -85,10 +107,10 @@ Simple array data paging pipe.
 **Usage:** `[] | paging:page?=1:size?=10`
 
 ```html
-<p>{{[1,2,3,4,5,6,7,8,9,10] | paging}}</p> 
+<p>{{[1,2,3,4,5,6,7,8,9,10] | paging}}</p>
 <!-- Array: [1,2,3,4,5,6,7,8,9,10] -->
 
-<p>{{[1,2,3,4,5,6,7,8,9,10] | paging:2:3}}</p> 
+<p>{{[1,2,3,4,5,6,7,8,9,10] | paging:2:3}}</p>
 <!-- Array: [4,5,6] -->
 ```
 
@@ -120,13 +142,15 @@ The input args of 1 number or number array depends on Math function.
 collect each object values by key.
 
 **Usage:** `any[] | zip`
+
 ```typescript
 input = [
-    {id: 1, name: 'cyx', age: 11}, 
-    {id: 2, name: 'abc', age: 21}, 
-    {id: 3, name: 'jack', age: 31}
+  {id: 1, name: 'cyx', age: 11},
+  {id: 2, name: 'abc', age: 21},
+  {id: 3, name: 'jack', age: 31}
 ]
 ```
+
 ```html
 <p>{{input | zip}}</p>
 <!--
@@ -146,11 +170,12 @@ objects group by key's value.
 
 ```typescript
 input = [
-    {age: 11, name: 'cyx'},
-    {age: 11, name: 'jack'},
-    {age: 23, name: 'abc'}
+  {age: 11, name: 'cyx'},
+  {age: 11, name: 'jack'},
+  {age: 23, name: 'abc'}
 ]
 ```
+
 ```html
 <p>{{input | group:'age'}}</p>
 <!--

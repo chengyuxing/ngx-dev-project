@@ -1,6 +1,6 @@
 {
   "name": "ngx-pipes-lite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "chengyuxing",
   "description": "Useful pipes for angular14+",
   "license": "MIT",
@@ -8,11 +8,9 @@
     "ngx",
     "angular",
     "pipes",
-    "filters",
-    "ajax",
-    "http",
-    "angular pipe",
-    "angular filter"
+    "angular ajax",
+    "angular http",
+    "angular pipe"
   ],
   "repository": {
     "type": "git",
