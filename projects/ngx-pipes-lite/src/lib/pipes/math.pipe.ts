@@ -4,7 +4,7 @@ export type Func = 'sum' | 'max' | 'min' | 'hypot' | 'atan2' | 'imul' | 'pow' |
   'sin' | 'cos' | 'abs' | 'acos' | 'acosh' | 'asin' | 'asinh' | 'atan' | 'atanh' |
   'cbrt' | 'ceil' | 'clz32' | 'cosh' | 'exp' | 'expm1' | 'floor' | 'fround' |
   'log' | 'log1p' | 'log2' | 'log10' | 'randomx' | 'round' | 'sign' | 'sinh' |
-  'sqrt' | 'tan' | 'tanh' | 'trunc'
+  'sqrt' | 'tan' | 'tanh' | 'trunc' | 'avg'
   ;
 
 /**
@@ -104,6 +104,8 @@ export class MathPipe implements PipeTransform {
         return Math.max(...value);
       case "min":
         return Math.min(...value);
+      case "avg":
+        return value.reduce((acc, curr) => acc + curr, 0) / value.length;
       case "hypot":
         return Math.hypot(...value);
       case "atan2":
