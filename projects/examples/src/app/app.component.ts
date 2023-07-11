@@ -15,6 +15,7 @@ import {Component} from '@angular/core';
       </ng-container>
       <p>{{5 | math:'sqrt' | math:'floor'}}</p>
       <pre>{{objects | zip | json}}</pre>
+      <pre>{{objects | group:'age' | json}}</pre>
   `,
   styles: []
 })
@@ -24,10 +25,10 @@ export class AppComponent {
   objects = [
     {id: 1, name: 'cyx', age: 11},
     {id: 2, name: 'abc', age: 21},
-    {id: 3, name: 'jack', age: 31},
-    {id: 4, name: 'qq', age: 34},
+    {id: 3, name: 'jack', age: 11},
+    {id: 4, name: 'qq', age: 11},
     {id: 5, name: 'mike', age: 10},
-    {id: 6, name: 'lisa', age: 18},
+    {id: 6, name: 'lisa', age: 11},
   ]
 
   next(pages: number) {

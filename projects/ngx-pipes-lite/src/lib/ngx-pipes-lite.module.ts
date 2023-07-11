@@ -5,13 +5,15 @@ import {HttpClientModule} from "@angular/common/http";
 import {PagingPipe} from "./pipes/paging.pipe";
 import {MathPipe} from "./pipes/math.pipe";
 import {ZipPipe} from "./pipes/zip.pipe";
+import {GroupPipe} from "./pipes/group.pipe";
 
 export const PIPES = [
   AjaxGetJsonPipe,
   TruncPipe,
   PagingPipe,
   MathPipe,
-  ZipPipe
+  ZipPipe,
+  GroupPipe
 ];
 
 @NgModule({
