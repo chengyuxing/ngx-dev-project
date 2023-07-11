@@ -1,8 +1,8 @@
 {
   "name": "ngx-pipes-lite",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "chengyuxing",
-  "description": "Useful pipes for angular14+",
+  "description": "Useful pipes for angular14+.",
   "license": "MIT",
   "keywords": [
     "ngx",

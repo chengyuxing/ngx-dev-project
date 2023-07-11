@@ -85,18 +85,19 @@ export class ResultWrapper {
  * @usageNotes
  * `string | get$:{args}?:{options}?`
  * #### With args
- * ```javascript
- * 'api' | get$:{a:1,b:2} // actual request: api?a=1&b=2
- * 'api' | get$:{a:1,b:2}:{headers:{Authorization:xxx}} // actual request: api?a=1&b=2 with header {Authorization: xxx}
+ * ```shell
+ * 'api' | get$ #actual request: api
+ * 'api' | get$:{a:1,b:2} #actual request: api?a=1&b=2
+ * 'api' | get$:{a:1,b:2}:{headers:{Authorization:xxx}} #actual request: api?a=1&b=2 with header {Authorization: xxx}
  * ```
  * #### Example
  * ```html
  * <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
- *   <ng-container *ngIf="result.valid">
- *     <p *ngFor="let item of result.data">
+ *   <ul *ngIf="result.valid">
+ *     <li *ngFor="let item of result.data">
  *       {{item.title}}
- *     </p>
- *   </ng-container>
+ *     </li>
+ *   </ul>
  * </ng-container>
  * ```
  * @see ResultWrapper
