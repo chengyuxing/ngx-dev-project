@@ -95,24 +95,23 @@ export class MathPipe implements PipeTransform {
         case "trunc":
           return Math.trunc(value);
       }
+      return NaN;
     }
-    if (value instanceof Array) {
-      switch (func) {
-        case "sum":
-          return value.reduce((acc, curr) => acc + curr, 0);
-        case "max":
-          return Math.max(...value);
-        case "min":
-          return Math.min(...value);
-        case "hypot":
-          return Math.hypot(...value);
-        case "atan2":
-          return Math.atan2(value[0], value[1]);
-        case "imul":
-          return Math.imul(value[0], value[1]);
-        case "pow":
-          return Math.pow(value[0], value[1]);
-      }
+    switch (func) {
+      case "sum":
+        return value.reduce((acc, curr) => acc + curr, 0);
+      case "max":
+        return Math.max(...value);
+      case "min":
+        return Math.min(...value);
+      case "hypot":
+        return Math.hypot(...value);
+      case "atan2":
+        return Math.atan2(value[0], value[1]);
+      case "imul":
+        return Math.imul(value[0], value[1]);
+      case "pow":
+        return Math.pow(value[0], value[1]);
     }
     return NaN;
   }
