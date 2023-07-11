@@ -115,3 +115,48 @@ The input args of 1 number or number array depends on Math function.
 <!-- number: Math.random * 10 -->
 ```
 
+### zip
+
+collect each object values by key.
+
+**Usage:** `any[] | zip`
+```typescript
+input = [
+    {id: 1, name: 'cyx', age: 11}, 
+    {id: 2, name: 'abc', age: 21}, 
+    {id: 3, name: 'jack', age: 31}
+]
+```
+```html
+<p>{{input | zip}}</p>
+<!--
+{
+  id: [1, 2, 3],
+  name: ['cyx', 'abc', 'jack'],
+  age: [11, 21, 31]
+}
+-->
+```
+
+### group
+
+objects group by key's value.
+
+**Usage:** `any[] | group:key`
+
+```typescript
+input = [
+    {age: 11, name: 'cyx'},
+    {age: 11, name: 'jack'},
+    {age: 23, name: 'abc'}
+]
+```
+```html
+<p>{{input | group:'age'}}</p>
+<!--
+{
+  11: [{age: 11, name: "cyx"}, {age: 11, name: "jack"}],
+  23: [{age: 23, name: "abc"}]   
+}
+-->
+```
