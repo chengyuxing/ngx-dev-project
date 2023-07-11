@@ -1,12 +1,14 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {NgxPipesLiteModule} from "ngx-pipes-lite";
+import {ArrPipe} from "./pipes/arr.pipe";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArrPipe
   ],
   imports: [
     BrowserModule,
@@ -15,4 +17,5 @@ import {NgxPipesLiteModule} from "ngx-pipes-lite";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
