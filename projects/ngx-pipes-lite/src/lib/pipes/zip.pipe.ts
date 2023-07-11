@@ -3,14 +3,17 @@ import {Pipe, PipeTransform} from '@angular/core';
 /**
  * collect each object values by key.
  * @usageNotes
- * `{}[] | zip`
+ * `any[] | zip`
  * ```javascript
- *  input: [
+ * input: [
  *     {id: 1, name: 'cyx', age: 11},
  *     {id: 2, name: 'abc', age: 21},
  *     {id: 3, name: 'jack', age: 31}
  *   ]
- *  output: {
+ *
+ * input | zip
+ *
+ * output: {
  *    id: [1, 2, 3],
  *    name: ['cyx', 'abc', 'jack'],
  *    age: [11, 21, 31]
