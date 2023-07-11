@@ -2,7 +2,7 @@
 
 Useful pipes for angular v14+.
 
-[Change notes](CHANGE_NOTES.md).
+[Change notes](../../projects/ngx-pipes-lite/CHANGE_NOTES.md).
 
 ## Try `get$` pipe.
 
