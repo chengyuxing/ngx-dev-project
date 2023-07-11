@@ -31,7 +31,9 @@ Simple **http GET JSON request pipe** for angular template, display the ajax res
 
 The result is a wrapper(`Observable<ResultWrapper>`) of your result from the api, **SO `get$` always work with `async` pipe**.
 **ResultWrapper**: `Observable<{success: boolean, data?: any | any[], message: string, valid: boolean}>`
+
 **ResultWrapper#data**: your actual result.
+
 **ResultWrapper#valid**: `result.data` is not `null`, `undefined`, `length > 0`(array) and `{field:...}`(object).
 
 **Usage:** `string | get$:{args}?:{options}?`
@@ -44,11 +46,11 @@ The result is a wrapper(`Observable<ResultWrapper>`) of your result from the api
 
 ```angular2html
 <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
-  <ng-container *ngIf="result.valid">
-    <p *ngFor="let item of result.data">
+  <ul *ngIf="result.valid">
+    <li *ngFor="let item of result.data">
       {{item.title}}
-    </p>
-  </ng-container>
+    </li>
+  </ul>
 </ng-container>
 
 <!-- 
@@ -88,5 +90,28 @@ Simple array data paging pipe.
 
 <p>{{[1,2,3,4,5,6,7,8,9,10] | paging:2:3}}</p> 
 <!-- Array: [4,5,6] -->
+```
+
+### math
+
+Math pipe of javascript `Math` .
+
+The input args of 1 number or number array depends on Math function.
+
+**Usage:** `number` | `number[] | math:Func`
+
+```html
+<p>{{[2, 3] | math:'pow'}}</p>
+<!-- number: 8 -->
+
+<p>{{[1, 2, 3] | math:'sum'}}</p>
+<!-- number: 6 -->
+
+<p>{{1.5 | math:'floor'}}</p>
+<!-- number: 1 -->
+
+<!-- Additional -->
+<p>{{10 | math:'randomx'}}</p>
+<!-- number: Math.random * 10 -->
 ```
 
