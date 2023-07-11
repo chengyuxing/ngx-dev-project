@@ -41,28 +41,10 @@ pipe**.
 
 **Usage:** `string | get$:{args}?:{options}?`
 
-```javascript
-'api' | get$ // actual request: api
-'api' | get$
-:
-{
-  a:1, b
-:
-  2
-} // actual request: api?a=1&b=2
-'api' | get$
-:
-{
-  a:1, b
-:
-  2
-}
-:
-{
-  headers:{
-    Authorization:'xxx'
-  }
-} // actual request: api?a=1&b=2 with header {Authorization: xxx}
+```shell
+'api' | get$ # actual request: api
+'api' | get$:{a:1,b:2} # actual request: api?a=1&b=2
+'api' | get$:{a:1,b:2}:{headers:{Authorization:'xxx'}} # actual request: api?a=1&b=2 with header {Authorization: xxx}
 ```
 
 ```angular2html
