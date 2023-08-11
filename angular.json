@@ -12,11 +12,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-pipes-lite/ng-package.json"
+            "project": "projects/ngx-pipes-lite/ng-package.json",
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-pipes-lite/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-pipes-lite/tsconfig.lib.prod.json",
             },
             "development": {
               "tsConfig": "projects/ngx-pipes-lite/tsconfig.lib.json"
@@ -28,7 +28,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ngx-pipes-lite/tsconfig.spec.json",
-            "polyfills": "projects/ngx-pipes-lite/src/polyfill.ts"
+            "polyfills": "projects/ngx-pipes-lite/src/polyfills.ts"
           }
         },
         "lint": {

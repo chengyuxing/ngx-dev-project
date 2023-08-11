@@ -31,14 +31,6 @@
       "node_modules/@types"
     ]
   },
-  "files": [
-    "projects/examples/src/polyfills.ts",
-    "polyfills.ts"
-  ],
-  "include": [
-    "projects/examples/src/polyfills.ts",
-    "polyfills.ts"
-  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
