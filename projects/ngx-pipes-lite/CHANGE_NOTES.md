@@ -1,5 +1,8 @@
 # Change notes
 
+## 1.0.6
+- Support fesm2015.
+
 ## 1.0.5
 - Update pipe `get$` document.
 
