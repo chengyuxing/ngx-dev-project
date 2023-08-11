@@ -28,10 +28,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ngx-pipes-lite/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": "projects/ngx-pipes-lite/src/polyfill.ts"
           }
         },
         "lint": {
@@ -85,9 +82,7 @@
             "outputPath": "dist/examples",
             "index": "projects/examples/src/index.html",
             "main": "projects/examples/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills":"projects/examples/src/polyfills.ts",
             "tsConfig": "projects/examples/tsconfig.app.json",
             "assets": [
               "projects/examples/src/favicon.ico",

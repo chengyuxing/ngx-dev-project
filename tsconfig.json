@@ -21,14 +21,24 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2015",
-    "module": "ES2015",
+    "target": "ES2020",
     "useDefineForClassFields": false,
     "lib": [
-      "ES2015",
+      "ES2017",
       "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
     ]
   },
+  "files": [
+    "projects/examples/src/polyfills.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "projects/examples/src/polyfills.ts",
+    "polyfills.ts"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

@@ -7,7 +7,6 @@
     "declarationMap": true,
     "inlineSources": true,
     "types": [],
-    "target": "ES2015",
     "module": "ES2015"
   },
   "exclude": [
