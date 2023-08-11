@@ -76,10 +76,10 @@ Truncate the long text.
 <!-- string: 1234567890abcde... -->
 
 <p>{{'abcde' | trunc:3}}</p>
-<!-- string: tru... -->
+<!-- string: abc... -->
 
 <p>{{'abcde' | trunc:3:*}}</p>
-<!-- string: tru* -->
+<!-- string: abc* -->
 ```
 
 ### paging
@@ -116,7 +116,7 @@ The input args of 1 number or number array depends on Math function.
 
 <!-- Additional -->
 <p>{{10 | math:'randomx'}}</p>
-<!-- number: Math.random * 10 -->
+<!-- number: Math.random() * 10 -->
 ```
 
 ### zip

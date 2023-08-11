@@ -6,7 +6,9 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    "target": "ES2015",
+    "module": "ES2015"
   },
   "exclude": [
     "**/*.spec.ts"
