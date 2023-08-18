@@ -12,11 +12,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-pipes-lite/ng-package.json",
+            "project": "projects/ngx-pipes-lite/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-pipes-lite/tsconfig.lib.prod.json",
+              "tsConfig": "projects/ngx-pipes-lite/tsconfig.lib.prod.json"
             },
             "development": {
               "tsConfig": "projects/ngx-pipes-lite/tsconfig.lib.json"
@@ -89,7 +89,8 @@
               "projects/examples/src/assets"
             ],
             "styles": [
-              "projects/examples/src/styles.css"
+              "projects/examples/src/styles.css",
+              "node_modules/axpager/dist/themes/axpager.theme.light.css"
             ],
             "scripts": []
           },

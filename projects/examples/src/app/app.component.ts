@@ -1,25 +1,30 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {Paginator} from "axpager";
 
 @Component({
   selector: 'app-root',
   template: `
       <h2>Pipes Demo</h2>
-      <ng-container *ngIf="url | get$ | async as result">
-          <ul *ngIf="result.valid">
+          <ng-container *ngIf="url | get$ | async as result">
+            <ul *ngIf="result.valid">
               <li *ngFor="let item of result.data | paging:page">
-                  {{item.id}}. {{item.title | trunc:30}}
+                {{item.id}}. {{item.title | trunc:30}}
               </li>
-          </ul>
-          <button (click)="prev()">Prev page</button>&nbsp;&nbsp;
-          <button (click)="next(result.pages(10))">Next page</button>
-      </ng-container>
-      <p>{{5 | math:'sqrt' | math:'floor'}}</p>
-      <pre>{{objects | zip | json}}</pre>
-      <pre>{{objects | group:'age' | json}}</pre>
+            </ul>
+            <button (click)="prev()">Prev page</button>&nbsp;&nbsp;
+            <button (click)="next(result.pages(10))">Next page</button>
+          </ng-container>
+          <p>{{5 | math:'sqrt' | math:'floor'}}</p>
+          <pre>{{objects | zip | json}}</pre>
+          <pre>{{objects | group:'age' | json}}</pre>
+
+      <div #pager style="padding: 20px"></div>
   `,
   styles: []
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+  @ViewChild("pager") pagerContainer!: ElementRef;
+  pager!: Paginator;
   page = 1;
   url = 'https://jsonplaceholder.typicode.com/todos';
   objects = [
@@ -43,5 +48,15 @@ export class AppComponent {
       return;
     }
     this.page -= 1;
+  }
+
+  ngAfterViewInit(): void {
+    this.pager = Paginator.init(this.pagerContainer.nativeElement);
+    this.pager.of(new Array(145), {
+      success: (data, pageEvent) => {
+        console.log(pageEvent);
+      },
+    });
+
   }
 }

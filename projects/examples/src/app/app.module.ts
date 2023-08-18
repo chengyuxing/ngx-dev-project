@@ -10,7 +10,7 @@ import {NgxPipesLiteModule} from "ngx-pipes-lite";
   ],
   imports: [
     BrowserModule,
-    NgxPipesLiteModule
+    NgxPipesLiteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
