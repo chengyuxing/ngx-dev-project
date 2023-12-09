@@ -11,18 +11,35 @@ Open [get$ with paging](https://stackblitz.com/edit/stackblitz-starters-tpdzxg?f
 ## Installation
 
 1. Install: `npm i ngx-pipes-lite`
-2. Add to module:
+2. Add to module or standalone component:
 
 ```typescript
-import {NgxPipesLiteModule} from "ngx-pipes-lite";
+import {AjaxGetJsonPipe} from "ngx-pipes-lite";
 
 @NgModule({
   // ...
   imports: [
     // ...
-    NgxPipesLiteModule
+    AjaxGetJsonPipe
   ]
 })
+```
+
+or
+
+```typescript
+import {AjaxGetJsonPipe} from "ngx-pipes-lite";
+
+@Component({
+  // ...
+  imports: [
+    AjaxGetJsonPipe
+  ]
+  // ...
+})
+export class AppComponent {
+
+}
 ```
 
 ## Pipes
@@ -50,11 +67,11 @@ pipe**.
 ```angular2html
 
 <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
-  <ul *ngIf="result.valid">
-    <li *ngFor="let item of result.data">
-      {{item.title}}
-    </li>
-  </ul>
+    <ul *ngIf="result.valid">
+        <li *ngFor="let item of result.data">
+            {{ item.title }}
+        </li>
+    </ul>
 </ng-container>
 
 <!-- 
@@ -64,6 +81,8 @@ pipe**.
 ... 
 -->
 ```
+
+> `HttpClientModule` is required.
 
 ### trunc
 
