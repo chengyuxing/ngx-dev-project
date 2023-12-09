@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 /**
- * collect each object values by key.
+ * Collect each object values by key.
  * @usageNotes
  * `any[] | zip`
  * ```javascript
@@ -26,7 +26,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class ZipPipe implements PipeTransform {
   /**
-   * collect each object values by key.
+   * Collect each object values by key.
    * @param objects some objects.
    */
   transform(objects: any[] = []): { [index: string]: any[] } {

@@ -1,5 +1,9 @@
 # Change notes
 
+## 1.0.9
+
+- New pipe `coalesce`.
+
 ## 1.0.8
 
 - Update readme.

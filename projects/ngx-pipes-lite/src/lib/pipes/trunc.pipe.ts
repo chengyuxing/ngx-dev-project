@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 /**
- * truncate long text.
+ * Truncate long text.
  * @usageNotes
  * `string | trunc:length?=15:replace?='...'`
  */
@@ -11,7 +11,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class TruncPipe implements PipeTransform {
   /**
-   * truncate long text.
+   * Truncate long text.
    * @param value string text
    * @param length max length to be left
    * @param replace replaced text

@@ -186,3 +186,16 @@ input = [
 }
 -->
 ```
+
+### coalesce
+
+Return first value which not null and not undefined.
+
+**Usage:** `any[] | coalesce`
+
+```html
+<p>{{[null, 'b', 'c', 'd'] | coalesce}}</p>
+<!--
+'b'
+-->
+```

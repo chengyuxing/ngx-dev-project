@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 /**
- * objects group by key's value.
+ * Objects group by key's value.
  * @usageNotes
  * `any[] | group:key`
  * ```javascript
@@ -26,7 +26,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class GroupPipe implements PipeTransform {
   /**
-   * objects group by key's value.
+   * Objects group by key's value.
    * @param objects some objects
    * @param key key
    */

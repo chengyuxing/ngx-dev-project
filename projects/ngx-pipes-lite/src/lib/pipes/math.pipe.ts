@@ -30,7 +30,7 @@ export type Func = 'sum' | 'max' | 'min' | 'hypot' | 'atan2' | 'imul' | 'pow' |
 })
 export class MathPipe implements PipeTransform {
   /**
-   * math pipe.
+   * Math pipe.
    * @param value number or number array.
    * @param func function
    */
