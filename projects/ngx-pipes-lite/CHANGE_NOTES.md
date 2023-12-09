@@ -1,5 +1,8 @@
 # Change notes
 
+## 1.0.7
+- Support angular17, all pipes change to standalone.
+
 ## 1.0.6
 - Support fesm2015.
 
