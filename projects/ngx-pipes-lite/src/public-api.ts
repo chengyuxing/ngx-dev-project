@@ -8,3 +8,4 @@ export * from './lib/pipes/paging.pipe';
 export * from './lib/pipes/math.pipe';
 export * from './lib/pipes/zip.pipe';
 export * from './lib/pipes/group.pipe';
+export * from './lib/pipes/coalesce.pipe';
