@@ -6,7 +6,8 @@ import {Pipe, PipeTransform} from '@angular/core';
  * `string | trunc:length?=15:replace?='...'`
  */
 @Pipe({
-  name: 'trunc'
+  name: 'trunc',
+  standalone: true
 })
 export class TruncPipe implements PipeTransform {
   /**

@@ -103,7 +103,8 @@ export class ResultWrapper {
  * @see ResultWrapper
  */
 @Pipe({
-  name: 'get$'
+  name: 'get$',
+  standalone: true
 })
 export class AjaxGetJsonPipe implements PipeTransform {
   constructor(private http: HttpClient) {

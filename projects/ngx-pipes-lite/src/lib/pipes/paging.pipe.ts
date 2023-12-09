@@ -6,7 +6,8 @@ import {Pipe, PipeTransform} from '@angular/core';
  * `[] | paging:page?=1:size?=10`
  */
 @Pipe({
-  name: 'paging'
+  name: 'paging',
+  standalone: true
 })
 export class PagingPipe implements PipeTransform {
   /**

@@ -21,7 +21,8 @@ import {Pipe, PipeTransform} from '@angular/core';
  * ```
  */
 @Pipe({
-  name: 'zip'
+  name: 'zip',
+  standalone: true
 })
 export class ZipPipe implements PipeTransform {
   /**

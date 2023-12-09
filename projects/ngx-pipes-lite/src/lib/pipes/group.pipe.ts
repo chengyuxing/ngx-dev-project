@@ -21,7 +21,8 @@ import {Pipe, PipeTransform} from '@angular/core';
  * ```
  */
 @Pipe({
-  name: 'group'
+  name: 'group',
+  standalone: true
 })
 export class GroupPipe implements PipeTransform {
   /**

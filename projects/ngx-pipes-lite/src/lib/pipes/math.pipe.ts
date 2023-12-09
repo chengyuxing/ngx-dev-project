@@ -25,7 +25,8 @@ export type Func = 'sum' | 'max' | 'min' | 'hypot' | 'atan2' | 'imul' | 'pow' |
  * @see Math
  */
 @Pipe({
-  name: 'math'
+  name: 'math',
+  standalone: true
 })
 export class MathPipe implements PipeTransform {
   /**
