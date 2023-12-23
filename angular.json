@@ -82,7 +82,7 @@
             "outputPath": "dist/examples",
             "index": "projects/examples/src/index.html",
             "main": "projects/examples/src/main.ts",
-            "polyfills":"projects/examples/src/polyfills.ts",
+            "polyfills": "projects/examples/src/polyfills.ts",
             "tsConfig": "projects/examples/tsconfig.app.json",
             "assets": [
               "projects/examples/src/favicon.ico",
@@ -145,6 +145,46 @@
             "lintFilePatterns": [
               "projects/examples/**/*.ts",
               "projects/examples/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-sidebar": {
+      "projectType": "library",
+      "root": "projects/ngx-sidebar",
+      "sourceRoot": "projects/ngx-sidebar/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-sidebar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-sidebar/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-sidebar/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-sidebar/src/test.ts",
+            "tsConfig": "projects/ngx-sidebar/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-sidebar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-sidebar/**/*.ts",
+              "projects/ngx-sidebar/**/*.html"
             ]
           }
         }

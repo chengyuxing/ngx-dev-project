@@ -1,0 +1,46 @@
+<aside [class]="color" [class.close]="!isExpand">
+  <header class="row">
+    <div class="backrow" (click)="backward()">
+      <svg id="menu" viewBox="0 0 542.187 461.8" class="icon back" *ngIf="isTopMenu || !isExpand else backIcon">
+        <g>
+          <path
+            d="M184.508 112.461V1.656h357.677v110.805H184.508M184.508 287.127V176.329h357.679v110.798H184.508M184.508 461.8V351h357.681v110.8H184.508M116.022 58.001c0 32.044-25.974 58.011-58.012 58.011C25.973 116.012 0 90.045 0 58.002 0 25.961 25.973-.005 58.01-.005c32.038 0 58.012 25.967 58.012 58.005M116.022 224.827c0 32.037-25.974 58.01-58.012 58.01-32.037 0-58.01-25.973-58.01-58.01 0-32.036 25.973-58.011 58.01-58.011 32.038 0 58.012 25.975 58.012 58.01M116.022 403.357c0 32.038-25.974 58.011-58.012 58.011-32.037 0-58.01-25.973-58.01-58.01 0-32.04 25.973-58.01 58.01-58.01 32.038 0 58.012 25.97 58.012 58.01"></path>
+        </g>
+      </svg>
+      <ng-template #backIcon>
+        <svg id="arrowleft" viewBox="0 0 14.2 21" class="icon back">
+          <path d="M10.5 21l3.7-3.7-6.8-6.8 6.8-6.8L10.5 0 0 10.5z"></path>
+        </svg>
+      </ng-template>
+      <h1 class="label" *ngIf="isExpand">
+        <span *ngIf="currentNavItem else defaultMenu">{{ currentNavItem.title }}</span>
+        <ng-template #defaultMenu>
+          Menu
+        </ng-template>
+      </h1>
+    </div>
+    <svg id="close" viewBox="0 0 18 18" class="small icon close" *ngIf="isExpand" @fadeInOut
+         (click)="toggleDisplay()">
+      <path
+        d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
+    </svg>
+  </header>
+  <header class="row search"></header>
+  <ul class="list">
+    <li *ngFor="let item of displayNavItems;index as i;trackBy:trackById" (click)="clickItem(item,i)"
+        [class.selected]="item === currentNavItem">
+      <div class="title">
+        <svg id="share" class="icon" viewBox="0 0 572.987 572.987">
+        </svg>
+        <span class="label" *ngIf="isExpand">{{ item.title }}</span>
+      </div>
+      <svg id="arrowright" class="small icon" viewBox="0 0 14.2 21"
+           *ngIf="(item.children && item.children.length > 0) && isExpand">
+        <path d="M14.2 10.5L3.7 0 0 3.7l6.8 6.8L0 17.3 3.7 21z"></path>
+      </svg>
+    </li>
+  </ul>
+  <div class="doc" [ngClass]="docDisplayClass" *ngIf="enableDocPanel">
+    <ng-content></ng-content>
+  </div>
+</aside>

@@ -14,6 +14,9 @@
     "paths": {
       "ngx-pipes-lite": [
         "dist/ngx-pipes-lite"
+      ],
+      "ngx-sidebar": [
+        "dist/ngx-sidebar"
       ]
     },
     "declaration": false,
