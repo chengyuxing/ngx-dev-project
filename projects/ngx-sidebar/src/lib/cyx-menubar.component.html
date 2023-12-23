@@ -1,4 +1,4 @@
-<aside [class]="color" [class.close]="!isExpand">
+<div class="menubar" [ngClass]="color" [class.close]="!isExpand">
   <header class="row">
     <div class="backrow" (click)="backward()">
       <svg id="menu" viewBox="0 0 542.187 461.8" class="icon back" *ngIf="isTopMenu || !isExpand else backIcon">
@@ -13,7 +13,7 @@
         </svg>
       </ng-template>
       <h1 class="label" *ngIf="isExpand">
-        <span *ngIf="currentNavItem else defaultMenu">{{ currentNavItem.title }}</span>
+        <span *ngIf="currentItem else defaultMenu">{{ currentItem.title }}</span>
         <ng-template #defaultMenu>
           {{ title }}
         </ng-template>
@@ -28,7 +28,7 @@
   <header class="row search"></header>
   <ul class="list">
     <li *ngFor="let item of displayNavItems;index as i;trackBy:trackById" (click)="clickItem(item,i)"
-        [class.selected]="item === currentNavItem">
+        [class.selected]="item === currentItem">
       <div class="title">
         <ng-container *ngIf="item.icon else defaultItemIcon">
           <div class="icon" [innerHTML]="iconHTML(item.icon)"></div>
@@ -50,4 +50,4 @@
   <div class="doc" [ngClass]="docDisplayClass" *ngIf="enableDocPanel">
     <ng-content></ng-content>
   </div>
-</aside>
+</div>

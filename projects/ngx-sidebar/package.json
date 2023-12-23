@@ -1,6 +1,6 @@
 {
-  "name": "ngx-sidebar",
-  "version": "0.0.1",
+  "name": "ngx-menubar",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"

@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-sidebar.component";
+import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-menubar.component";
 
 @Component({
   selector: 'app-sidebar',
   template: `
       <div class="sidebar" [class.close]="!sidebar.isExpand">
-          <cyx-sidebar #sidebar [title]="'政务管理系统'" [datasource]="navs" [iconParser]="parseSvfIcon" (itemClick)="clickItem($event)"
+          <cyx-menubar #sidebar [title]="'政务管理系统'" [enableDocPanel]="true" color="light" [datasource]="navs" [iconParser]="parseSvfIcon" (itemClick)="clickItem($event)"
                        (expand)="stateChanged($event)">
               {{ item | json }}
-          </cyx-sidebar>
+          </cyx-menubar>
       </div>
   `,
   styles: [
@@ -22,13 +22,6 @@ import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-sidebar.componen
 
       .sidebar.close {
         width: 50px;
-      }
-
-      .label {
-        flex: 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
     `
   ]

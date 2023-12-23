@@ -16,7 +16,7 @@ export interface IMenuItem {
 }
 
 /**
- * Simple basic sidebar with step-into view display menu items(not tree view display).
+ * Simple basic menubar with step-into view display menu items(not tree view display).
  * ### Notice:
  * This component without animation while state changed, as you can define in your
  * custom parent element as more freedom.
@@ -35,24 +35,24 @@ export interface IMenuItem {
  *   }
  * </style>
  *
- * <div class="container" [class.close]="!sidebar.isStateMax">
- *  <cyx-sidebar #sidebar [datasource]="navs"></cyx-sidebar>
+ * <div class="container" [class.close]="!menubar.isExpand">
+ *  <cyx-menubar #menubar [datasource]="navs"></cyx-menubar>
  * </div>
  * ```
  * @see IMenuItem
  */
 @Component({
   standalone: true,
-  selector: 'cyx-sidebar',
-  templateUrl: 'cyx-sidebar.component.html',
+  selector: 'cyx-menubar',
+  templateUrl: 'cyx-menubar.component.html',
   imports: [
     BrowserAnimationsModule,
     NgForOf,
     NgIf
   ],
-  styleUrls: ['cyx-sidebar.component.scss',
-    'cyx-sidebar.light.component.scss',
-    'cyx-sidebar.dark.component.scss'],
+  styleUrls: ['cyx-menubar.component.scss',
+    'cyx-menubar.light.component.scss',
+    'cyx-menubar.dark.component.scss'],
   animations: [
     trigger('fadeInOut', [
       state('void', style({opacity: 0})),
@@ -60,7 +60,7 @@ export interface IMenuItem {
     ])
   ]
 })
-export class CyxSidebarComponent implements OnInit {
+export class CyxMenubarComponent implements OnInit {
   /**
    * Default Top menu title.
    */
@@ -70,7 +70,7 @@ export class CyxSidebarComponent implements OnInit {
    */
   @Input() datasource: IMenuItem[] = [];
   /**
-   * Theme color.
+   * Theme color, 'dark' or 'light'.
    */
   @Input() color: string = 'dark';
   /**
@@ -91,7 +91,7 @@ export class CyxSidebarComponent implements OnInit {
    * ```
    * @param icon icon name.
    */
-  @Input() iconParser = (icon: string) => icon;
+  @Input() iconParser: Function = (icon: string) => icon;
   /**
    * Sidebar display state change event.
    */
@@ -102,10 +102,10 @@ export class CyxSidebarComponent implements OnInit {
   @Output() itemClick: EventEmitter<IMenuItem> = new EventEmitter<IMenuItem>();
 
   protected indices: number[] = [];
-  currentNavItem: IMenuItem | null = null;
-  protected currentNavItemChildren: IMenuItem[] = [];
+  currentItem: IMenuItem | null = null;
+  protected currentItemChildren: IMenuItem[] = [];
   /**
-   * Is sidebar display state max or not.
+   * Is menubar expanded or not.
    */
   isExpand: boolean = true;
 
@@ -122,9 +122,9 @@ export class CyxSidebarComponent implements OnInit {
 
   protected get displayNavItems() {
     if (this.isTopMenu) {
-      this.currentNavItemChildren = this.datasource;
+      this.currentItemChildren = this.datasource;
     }
-    return this.currentNavItemChildren;
+    return this.currentItemChildren;
   }
 
   constructor(private sanitizer: DomSanitizer) {
@@ -141,10 +141,10 @@ export class CyxSidebarComponent implements OnInit {
 
   clickItem(item: IMenuItem, index: number) {
     this.isExpand = true;
-    this.currentNavItem = item;
+    this.currentItem = item;
     if (item.children && item.children.length > 0) {
       this.indices.push(index);
-      this.currentNavItemChildren = this.currentNavItem.children || [];
+      this.currentItemChildren = this.currentItem.children || [];
     }
     this.itemClick.emit(item);
   }
@@ -160,18 +160,18 @@ export class CyxSidebarComponent implements OnInit {
     }
     this.indices.pop();
     if (this.isTopMenu) {
-      this.currentNavItem = null;
-      this.currentNavItemChildren = this.datasource;
+      this.currentItem = null;
+      this.currentItemChildren = this.datasource;
       return;
     }
-    let prevNavItem: IMenuItem | null = null;
-    let prevNavItems: IMenuItem[] = this.datasource;
+    let prevItem: IMenuItem | null = null;
+    let prevItems: IMenuItem[] = this.datasource;
     for (const index of this.indices) {
-      prevNavItem = prevNavItems[index];
-      prevNavItems = prevNavItem.children || [];
+      prevItem = prevItems[index];
+      prevItems = prevItem.children || [];
     }
-    this.currentNavItem = prevNavItem;
-    this.currentNavItemChildren = prevNavItems;
+    this.currentItem = prevItem;
+    this.currentItemChildren = prevItems;
   }
 
   toggleDisplay() {

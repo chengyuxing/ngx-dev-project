@@ -1,24 +1,140 @@
-# NgxSidebar
+# Ngx Menubar component
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+Simple basic menubar with step-into view display menu items(not tree view display).
 
-## Code scaffolding
+This component without animation while state changed, as you can define in your
+custom parent element as more freedom.
 
-Run `ng generate component component-name --project ngx-sidebar` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-sidebar`.
-> Note: Don't forget to add `--project ngx-sidebar` or else it will be added to the default project in your `angular.json` file. 
+## Installation
 
-## Build
+1. Install: `npm i ngx-menubar`;
 
-Run `ng build ngx-sidebar` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. Add to module or standalone component:
 
-## Publishing
+   ```typescript
+   import {CyxMenubarComponent} from "ngx-menubar";
+   
+   @NgModule({
+     // ...
+     imports: [
+       // ...
+       CyxMenubarComponent
+     ]
+   })
+   ```
 
-After building your library with `ng build ngx-sidebar`, go to the dist folder `cd dist/ngx-sidebar` and run `npm publish`.
+   or
 
-## Running unit tests
+   ```typescript
+   import {CyxMenubarComponent} from "ngx-menubar";
+   
+   @Component({
+     // ...
+     imports: [
+       CyxMenubarComponent
+     ]
+     // ...
+   })
+   export class AppComponent {
+   
+   }
+   ```
 
-Run `ng test ngx-sidebar` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Example
 
-## Further help
+`app.component.css`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```css
+.container {
+  width: 300px;
+  height: 500px;
+  transition: width .2s ease-out;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
+}
+
+.container.close {
+  width: 50px;
+}
+```
+
+`app.component.html`
+
+```html
+
+<div class="container" [class.close]="!menubar.isExpand">
+  <cyx-menubar #menubar [datasource]="items">
+    <!-- some elements can be here if property 'enableDocPanel' set to true. -->
+  </cyx-menubar>
+</div>
+```
+
+`app.component.ts`
+
+```typescript
+@Component({...})
+export class AppComponent {
+  items: IMenuItem[] = [
+    {id: 1, title: 'runtime', icon: 'deployed_code', children: []},
+    {
+      id: 2, title: 'main', children: [
+        {id: 5, title: 'app-routing.module.ts', children: []},
+        {id: 6, title: 'app.module.ts', children: []},
+        {id: 7, title: 'app.component.ts', children: []}
+      ]
+    },
+    //...
+  ]
+}
+```
+
+## Directives
+
+| Name                                               | Default value          | Description                                                  |
+|----------------------------------------------------|------------------------|--------------------------------------------------------------|
+| @Input() title: string                             | 'Menu'                 | Default Top menu title.                                      |
+| @Input() datasource: [IMenuItem](#IMenuItem)[]     | []                     | Menu items.                                                  |
+| @Input() color: string = 'dark';                   | 'dark'                 | Theme color, 'dark' or 'light'.                              |
+| @Input() enableDocPanel: boolean                   | false                  | Show bottom doc panel.                                       |
+| @Input() [iconParser](#IconParser): Function;      | (icon: string) => icon | Parse icon which from menu item data field `IMenuItem#icon`. |
+| @Output() expand: EventEmitter&lt;boolean&gt;      |                        | Sidebar display state change event.                          |
+| @Output() itemClick: EventEmitter&lt;IMenuItem&gt; |                        | Menu item click event.                                       |
+
+## Properties
+
+| Name                   | Default value | Description                   |
+|------------------------|---------------|-------------------------------|
+| currentItem: IMenuItem | null          | Selected item.                |
+| isExpand: boolean      | true          | Is menubar expanded or not.   |
+| `get` isTopMenu        |               | Is menu top level.            |
+| `get` docDisplayClass  |               | Doc panel display class name. |
+
+## Appendix
+
+### IconParser
+
+Example of parse icon name to icon html.
+
+```javascript
+// menu item data.
+// {id: 1, title: '...', icon: 'deployed_code'}
+
+// font icon.
+icon => `<span class="material-symbols-sharp">${icon}</span>`
+// svg icon.
+icon => `<svg viewBox="...">...</svg>`
+```
+
+### IMenuItem
+
+Sidebar menu item type.
+
+```typescript
+export interface IMenuItem {
+  id: number | string;
+  title: string;
+  icon?: string;
+  children?: IMenuItem[];
+  data?: { [key: string]: any }
+}
+```
+

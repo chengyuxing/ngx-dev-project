@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {AjaxGetJsonPipe, GroupPipe, MathPipe, PagingPipe, TruncPipe, ZipPipe} from "ngx-pipes-lite";
 import {HttpClientModule} from "@angular/common/http";
-import {CyxSidebarComponent} from "../../../ngx-sidebar/src/lib/cyx-sidebar.component";
+import {CyxMenubarComponent} from "../../../ngx-sidebar/src/lib/cyx-menubar.component";
 import {PipesComponent} from './components/pipes/pipes.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -28,7 +28,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MathPipe,
     ZipPipe,
     GroupPipe,
-    CyxSidebarComponent,
+    CyxMenubarComponent,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule
