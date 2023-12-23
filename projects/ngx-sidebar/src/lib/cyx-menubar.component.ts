@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {trigger, state, style, transition, animate} from "@angular/animations";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -60,7 +60,7 @@ export interface IMenuItem {
     ])
   ]
 })
-export class CyxMenubarComponent implements OnInit {
+export class CyxMenubarComponent {
   /**
    * Default Top menu title.
    */
@@ -133,10 +133,6 @@ export class CyxMenubarComponent implements OnInit {
   iconHTML(icon: string): SafeHtml {
     const iconHTMLString = this.iconParser(icon);
     return this.sanitizer.bypassSecurityTrustHtml(iconHTMLString);
-  }
-
-  ngOnInit(): void {
-
   }
 
   clickItem(item: IMenuItem, index: number) {
