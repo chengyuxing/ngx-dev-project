@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {trigger, state, style, transition, animate} from "@angular/animations";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 /**
  * Sidebar menu item type.
@@ -9,6 +10,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 export interface IMenuItem {
   id: number | string;
   title: string;
+  icon?: string;
   children?: IMenuItem[];
   data?: { [key: string]: any }
 }
@@ -60,6 +62,10 @@ export interface IMenuItem {
 })
 export class CyxSidebarComponent implements OnInit {
   /**
+   * Default Top menu title.
+   */
+  @Input() title: string = 'Menu';
+  /**
    * Menu items.
    */
   @Input() datasource: IMenuItem[] = [];
@@ -71,6 +77,21 @@ export class CyxSidebarComponent implements OnInit {
    * Show bottom doc panel.
    */
   @Input() enableDocPanel: boolean = false;
+  /**
+   * Parse icon which from menu item data field {@link IMenuItem#icon}, e.g.
+   * ```javascript
+   *  // menu item data.
+   *  {id: 1, title: '...', icon: 'deployed_code'}
+   *
+   *  // font icon.
+   *  icon => `<span class="material-symbols-sharp">${icon}</span>`
+   *
+   *  // svg icon.
+   *  icon => `<svg viewBox="...">...</svg>`
+   * ```
+   * @param icon icon name.
+   */
+  @Input() iconParser = (icon: string) => icon;
   /**
    * Sidebar display state change event.
    */
@@ -106,7 +127,12 @@ export class CyxSidebarComponent implements OnInit {
     return this.currentNavItemChildren;
   }
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
+  }
+
+  iconHTML(icon: string): SafeHtml {
+    const iconHTMLString = this.iconParser(icon);
+    return this.sanitizer.bypassSecurityTrustHtml(iconHTMLString);
   }
 
   ngOnInit(): void {

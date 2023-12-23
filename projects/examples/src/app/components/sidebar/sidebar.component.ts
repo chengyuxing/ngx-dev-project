@@ -5,7 +5,8 @@ import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-sidebar.componen
   selector: 'app-sidebar',
   template: `
       <div class="sidebar" [class.close]="!sidebar.isExpand">
-          <cyx-sidebar #sidebar [datasource]="navs" (itemClick)="clickItem($event)" (expand)="stateChanged($event)">
+          <cyx-sidebar #sidebar [title]="'政务管理系统'" [datasource]="navs" [iconParser]="parseSvfIcon" (itemClick)="clickItem($event)"
+                       (expand)="stateChanged($event)">
               {{ item | json }}
           </cyx-sidebar>
       </div>
@@ -34,7 +35,7 @@ import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-sidebar.componen
 })
 export class SidebarComponent implements OnInit {
   navs: IMenuItem[] = [
-    {id: 1, title: 'runtime', children: []},
+    {id: 1, title: 'runtime', icon: 'deployed_code', children: []},
     {
       id: 2, title: 'main', children: [
         {id: 5, title: 'app-routing.module.ts', children: []},
@@ -83,5 +84,9 @@ export class SidebarComponent implements OnInit {
   stateChanged(state: boolean) {
     this.sidebarState = state;
     console.log(state);
+  }
+
+  parseSvfIcon(icon: string): string {
+    return `<span class="material-symbols-sharp">${icon}</span>`;
   }
 }
