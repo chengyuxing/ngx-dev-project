@@ -101,12 +101,12 @@ export class AppComponent {
 
 ## Properties
 
-| Name                   | Default value | Description                   |
-|------------------------|---------------|-------------------------------|
-| currentItem: IMenuItem | null          | Selected item.                |
-| isExpand: boolean      | true          | Is menubar expanded or not.   |
-| `get` isTopMenu        |               | Is menu top level.            |
-| `get` docDisplayClass  |               | Doc panel display class name. |
+| Name                    | Default value | Description                   |
+|-------------------------|---------------|-------------------------------|
+| selectedItem: IMenuItem | null          | Selected item.                |
+| isExpand: boolean       | true          | Is menubar expanded or not.   |
+| `get` isTopMenu         |               | Is menu top level.            |
+| `get` docDisplayClass   |               | Doc panel display class name. |
 
 ## Appendix
 

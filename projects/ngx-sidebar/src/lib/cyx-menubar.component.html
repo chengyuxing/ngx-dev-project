@@ -13,7 +13,7 @@
         </svg>
       </ng-template>
       <h1 class="label" *ngIf="isExpand">
-        <span *ngIf="currentItem else defaultMenu">{{ currentItem.title }}</span>
+        <span *ngIf="currentTitle else defaultMenu">{{ currentTitle }}</span>
         <ng-template #defaultMenu>
           {{ title }}
         </ng-template>
@@ -25,10 +25,12 @@
         d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
     </svg>
   </header>
-  <header class="row search"></header>
+  <header class="row search">
+    <!--TODO implement search to filter items.-->
+  </header>
   <ul class="list">
-    <li *ngFor="let item of displayNavItems;index as i;trackBy:trackById" (click)="clickItem(item,i)"
-        [class.selected]="item === currentItem">
+    <li *ngFor="let item of displayItems;index as i;trackBy:trackById" (click)="clickItem(item,i)"
+        [class.selected]="item === selectedItem">
       <div class="title">
         <ng-container *ngIf="item.icon else defaultItemIcon">
           <div class="icon" [innerHTML]="iconHTML(item.icon)"></div>

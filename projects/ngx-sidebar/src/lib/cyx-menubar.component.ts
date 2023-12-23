@@ -102,8 +102,13 @@ export class CyxMenubarComponent {
   @Output() itemClick: EventEmitter<IMenuItem> = new EventEmitter<IMenuItem>();
 
   protected indices: number[] = [];
-  currentItem: IMenuItem | null = null;
-  protected currentItemChildren: IMenuItem[] = [];
+  protected currentTitle?: string | null = null;
+  protected currentChildren: IMenuItem[] = [];
+
+  /**
+   * Selected item.
+   */
+  selectedItem: IMenuItem | null = null;
   /**
    * Is menubar expanded or not.
    */
@@ -120,11 +125,11 @@ export class CyxMenubarComponent {
     return this.isExpand ? 'show' : 'hide';
   }
 
-  protected get displayNavItems() {
+  protected get displayItems() {
     if (this.isTopMenu) {
-      this.currentItemChildren = this.datasource;
+      this.currentChildren = this.datasource;
     }
-    return this.currentItemChildren;
+    return this.currentChildren;
   }
 
   constructor(private sanitizer: DomSanitizer) {
@@ -137,10 +142,11 @@ export class CyxMenubarComponent {
 
   clickItem(item: IMenuItem, index: number) {
     this.isExpand = true;
-    this.currentItem = item;
+    this.selectedItem = item;
     if (item.children && item.children.length > 0) {
       this.indices.push(index);
-      this.currentItemChildren = this.currentItem.children || [];
+      this.currentTitle = item.title;
+      this.currentChildren = item.children;
     }
     this.itemClick.emit(item);
   }
@@ -156,8 +162,8 @@ export class CyxMenubarComponent {
     }
     this.indices.pop();
     if (this.isTopMenu) {
-      this.currentItem = null;
-      this.currentItemChildren = this.datasource;
+      this.currentTitle = null;
+      this.currentChildren = this.datasource;
       return;
     }
     let prevItem: IMenuItem | null = null;
@@ -166,8 +172,8 @@ export class CyxMenubarComponent {
       prevItem = prevItems[index];
       prevItems = prevItem.children || [];
     }
-    this.currentItem = prevItem;
-    this.currentItemChildren = prevItems;
+    this.currentTitle = prevItem?.title;
+    this.currentChildren = prevItems;
   }
 
   toggleDisplay() {
