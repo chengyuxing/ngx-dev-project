@@ -45,7 +45,7 @@ h1, h2 {
     padding: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--border-bottom-color);
     transition: background .2s;
     color: var(--text-color);
@@ -93,6 +93,36 @@ h1, h2 {
     .icon.close {
       padding: .75rem 1rem;
       margin: 0;
+    }
+  }
+
+  .search {
+    position: relative;
+    justify-content: flex-end;
+
+    input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0 2.5rem 0 1rem;
+      color: currentColor;
+      font-size: 14px;
+      border: none;
+      outline: none;
+      background: transparent;
+      z-index: 10;
+
+      &:hover, &:focus {
+        outline: none;
+      }
+    }
+
+    .icon {
+      padding: 0.75rem 1rem;
+      margin: 0;
+      z-index: 11;
     }
   }
 

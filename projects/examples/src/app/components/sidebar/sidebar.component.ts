@@ -5,7 +5,7 @@ import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-menubar.componen
   selector: 'app-sidebar',
   template: `
       <div class="sidebar" [class.close]="!sidebar.isExpand">
-          <cyx-menubar #sidebar [title]="'政务管理系统'" [enableDocPanel]="true" color="light" [datasource]="navs" [iconParser]="parseSvfIcon" (itemClick)="clickItem($event)"
+          <cyx-menubar #sidebar [title]="'政务管理系统'" [enableDocPanel]="true" color="dark" [datasource]="navs" [iconParser]="parseSvfIcon" (itemClick)="clickItem($event)"
                        (expand)="stateChanged($event)">
               {{ item | json }}
           </cyx-menubar>
@@ -14,7 +14,7 @@ import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-menubar.componen
   styles: [
     `
       .sidebar {
-        width: 300px;
+        width: 350px;
         height: 500px;
         transition: width .2s ease-out;
         box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
@@ -72,6 +72,7 @@ export class SidebarComponent implements OnInit {
 
   clickItem(item: IMenuItem) {
     this.item = item;
+    console.log(item);
   }
 
   stateChanged(state: boolean) {

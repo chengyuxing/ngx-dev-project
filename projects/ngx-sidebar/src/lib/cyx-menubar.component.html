@@ -25,8 +25,22 @@
         d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
     </svg>
   </header>
-  <header class="row search">
-    <!--TODO implement search to filter items.-->
+  <header class="row search" *ngIf="isExpand" @fadeInOut>
+    <input type="text" #searchBox [placeholder]="searchConfig.placeHolder || ''"
+           [value]="searchTerms.value"
+           (input)="searchItems(searchBox.value)"
+           (keydown.enter)="searchItems(searchBox.value)">
+
+    <svg *ngIf="searchBox.value else queryIcon" id="arrowleft" viewBox="0 0 18 18" class="icon small"
+         (click)="searchBox.value = '';searchBox.focus();searchTerms.next('');">
+      <path d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
+    </svg>
+    <ng-template #queryIcon>
+      <svg id="search" viewBox="0 0 594.573 594.107" class="icon small" (click)="searchBox.focus()">
+        <path
+          d="M234.513 411.179c-96.785-.622-175.027-79.878-174.416-176.67.62-96.172 79.352-174.416 175.5-174.421l1.174.003c46.889.294 90.857 18.832 123.8 52.198 32.94 33.367 50.918 77.57 50.616 124.468-.296 46.687-18.703 90.524-51.823 123.42-33.112 32.894-77.04 51.003-123.69 51.003zm351.942 89.513l-3.588-3.585.008-.003-143.352-143.363c19.917-34.312 31.488-74.086 31.76-116.601C472.117 106.987 367.296.816 237.152-.003c-.525-.002-1.035-.002-1.557-.002C106.18 0 .838 104.516.005 234.125-.82 364.271 104.003 470.44 234.133 471.271c.519.002 1.022.005 1.54.005 43.258 0 83.795-11.72 118.664-32.1l143.226 143.241.013-.012 3.581 3.58c10.834 10.832 28.391 10.823 39.219 0l46.079-46.072c10.822-10.822 10.829-28.39 0-39.22"></path>
+      </svg>
+    </ng-template>
   </header>
   <ul class="list">
     <li *ngFor="let item of displayItems;index as i;trackBy:trackById" (click)="clickItem(item,i)"

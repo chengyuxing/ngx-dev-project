@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {trigger, state, style, transition, animate} from "@angular/animations";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {BehaviorSubject, debounceTime, distinctUntilChanged, map} from "rxjs";
 
 /**
  * Sidebar menu item type.
@@ -16,6 +17,14 @@ export interface IMenuItem {
 }
 
 /**
+ * Global menu item Search configuration type.
+ */
+export interface SearchConfig {
+  placeHolder?: string;
+  predicate?: (keyword: string, item: IMenuItem) => boolean;
+}
+
+/**
  * Simple basic menubar with step-into view display menu items(not tree view display).
  * ### Notice:
  * This component without animation while state changed, as you can define in your
@@ -25,7 +34,7 @@ export interface IMenuItem {
  * ```html
  * <style>
  *   .container {
- *      width: 300px;
+ *      width: 350px;
  *      height: 500px;
  *      transition: width .2s ease-out;
  *      box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
@@ -60,7 +69,7 @@ export interface IMenuItem {
     ])
   ]
 })
-export class CyxMenubarComponent {
+export class CyxMenubarComponent implements OnInit {
   /**
    * Default Top menu title.
    */
@@ -91,7 +100,14 @@ export class CyxMenubarComponent {
    * ```
    * @param icon icon name.
    */
-  @Input() iconParser: Function = (icon: string) => icon;
+  @Input() iconParser: (icon: string) => string = (icon: string) => icon;
+  /**
+   * Global menu item search configuration.
+   */
+  @Input() searchConfig: SearchConfig = {
+    placeHolder: 'search',
+    predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
+  }
   /**
    * Sidebar display state change event.
    */
@@ -104,7 +120,7 @@ export class CyxMenubarComponent {
   protected indices: number[] = [];
   protected currentTitle?: string | null = null;
   protected currentChildren: IMenuItem[] = [];
-
+  protected flattenItems: IMenuItem[] = [];
   /**
    * Selected item.
    */
@@ -113,6 +129,13 @@ export class CyxMenubarComponent {
    * Is menubar expanded or not.
    */
   isExpand: boolean = true;
+
+  private searchPredicate!: (keyword: string, item: IMenuItem) => boolean;
+
+  private _displayItems: IMenuItem[] = [];
+  protected get displayItems() {
+    return this._displayItems;
+  }
 
   /**
    * Is menu top level.
@@ -125,14 +148,42 @@ export class CyxMenubarComponent {
     return this.isExpand ? 'show' : 'hide';
   }
 
-  protected get displayItems() {
-    if (this.isTopMenu) {
-      this.currentChildren = this.datasource;
-    }
-    return this.currentChildren;
-  }
+  protected readonly searchTerms = new BehaviorSubject<string>('');
 
   constructor(private sanitizer: DomSanitizer) {
+  }
+
+  ngOnInit(): void {
+    this.currentChildren = this.datasource;
+    this._displayItems = this.currentChildren;
+    this.searchPredicate = this.searchConfig.predicate || (() => true);
+
+    this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      map(term => term.trim())
+    ).subscribe(term => {
+      if (term) {
+        this._displayItems = this.flattenItems.filter(item => this.searchPredicate(term, item));
+        return;
+      }
+      this._displayItems = this.currentChildren;
+    });
+
+    setTimeout(() => this.doFlatDatasource(this.datasource), 1);
+  }
+
+  private doFlatDatasource(datasource: IMenuItem[]) {
+    const flatting = (items: IMenuItem[]): IMenuItem[] => {
+      return items.reduce((acc: IMenuItem[], curr) => {
+        if (curr.children && curr.children.length > 0) {
+          return acc.concat(flatting(curr.children));
+        }
+        acc.push(curr);
+        return acc;
+      }, []);
+    }
+    this.flattenItems = flatting(datasource);
   }
 
   iconHTML(icon: string): SafeHtml {
@@ -140,13 +191,14 @@ export class CyxMenubarComponent {
     return this.sanitizer.bypassSecurityTrustHtml(iconHTMLString);
   }
 
-  clickItem(item: IMenuItem, index: number) {
+  protected clickItem(item: IMenuItem, index: number) {
     this.isExpand = true;
     this.selectedItem = item;
     if (item.children && item.children.length > 0) {
       this.indices.push(index);
       this.currentTitle = item.title;
       this.currentChildren = item.children;
+      this._displayItems = this.currentChildren;
     }
     this.itemClick.emit(item);
   }
@@ -164,6 +216,7 @@ export class CyxMenubarComponent {
     if (this.isTopMenu) {
       this.currentTitle = null;
       this.currentChildren = this.datasource;
+      this._displayItems = this.currentChildren;
       return;
     }
     let prevItem: IMenuItem | null = null;
@@ -174,6 +227,7 @@ export class CyxMenubarComponent {
     }
     this.currentTitle = prevItem?.title;
     this.currentChildren = prevItems;
+    this._displayItems = this.currentChildren;
   }
 
   toggleDisplay() {
@@ -183,5 +237,9 @@ export class CyxMenubarComponent {
 
   trackById(index: number, item: IMenuItem) {
     return item.id;
+  }
+
+  searchItems(value: string) {
+    this.searchTerms.next(value);
   }
 }

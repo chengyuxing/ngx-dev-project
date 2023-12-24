@@ -46,7 +46,7 @@ custom parent element as more freedom.
 
 ```css
 .container {
-  width: 300px;
+  width: 350px;
   height: 500px;
   transition: width .2s ease-out;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
@@ -89,15 +89,16 @@ export class AppComponent {
 
 ## Directives
 
-| Name                                               | Default value          | Description                                                  |
-|----------------------------------------------------|------------------------|--------------------------------------------------------------|
-| @Input() title: string                             | 'Menu'                 | Default Top menu title.                                      |
-| @Input() datasource: [IMenuItem](#IMenuItem)[]     | []                     | Menu items.                                                  |
-| @Input() color: string = 'dark';                   | 'dark'                 | Theme color, 'dark' or 'light'.                              |
-| @Input() enableDocPanel: boolean                   | false                  | Show bottom doc panel.                                       |
-| @Input() [iconParser](#IconParser): Function;      | (icon: string) => icon | Parse icon which from menu item data field `IMenuItem#icon`. |
-| @Output() expand: EventEmitter&lt;boolean&gt;      |                        | Sidebar display state change event.                          |
-| @Output() itemClick: EventEmitter&lt;IMenuItem&gt; |                        | Menu item click event.                                       |
+| Name                                                 | Default value                 | Description                                                  |
+| ---------------------------------------------------- | ----------------------------- | ------------------------------------------------------------ |
+| @Input() title: string                               | 'Menu'                        | Default Top menu title.                                      |
+| @Input() datasource: [IMenuItem](#IMenuItem)[]       | []                            | Menu items.                                                  |
+| @Input() color: string = 'dark';                     | 'dark'                        | Theme color, 'dark' or 'light'.                              |
+| @Input() enableDocPanel: boolean                     | false                         | Show bottom doc panel.                                       |
+| @Input() [iconParser](#IconParser): Function;        | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
+| @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |
+| @Output() expand: EventEmitter&lt;boolean&gt;        |                               | Sidebar display state change event.                          |
+| @Output() itemClick: EventEmitter&lt;IMenuItem&gt;   |                               | Menu item click event.                                       |
 
 ## Properties
 
@@ -138,3 +139,20 @@ export interface IMenuItem {
 }
 ```
 
+### SearchConfig
+
+```typescript
+export interface SearchConfig {
+  placeHolder?: string;
+  predicate?: (keyword: string, item: IMenuItem) => boolean;
+}
+```
+
+#### DefaultSearchConfig
+
+```typescript
+{
+  placeHolder: 'search',
+  predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
+}
+```
