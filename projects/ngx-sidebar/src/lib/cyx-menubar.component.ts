@@ -235,7 +235,7 @@ export class CyxMenubarComponent implements OnInit {
     this.expand.emit(this.isExpand);
   }
 
-  trackById(index: number, item: IMenuItem) {
+  trackById(_: number, item: IMenuItem) {
     return item.id;
   }
 

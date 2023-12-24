@@ -1,5 +1,5 @@
-<div class="menubar" [ngClass]="color" [class.close]="!isExpand">
-  <header class="row">
+<div class="menubar" [ngClass]="color">
+  <header>
     <div class="backrow" (click)="backward()">
       <svg id="menu" viewBox="0 0 542.187 461.8" class="icon back" *ngIf="isTopMenu || !isExpand else backIcon">
         <g>
@@ -12,8 +12,9 @@
           <path d="M10.5 21l3.7-3.7-6.8-6.8 6.8-6.8L10.5 0 0 10.5z"></path>
         </svg>
       </ng-template>
+
       <h1 class="label" *ngIf="isExpand">
-        <span *ngIf="currentTitle else defaultMenu">{{ currentTitle }}</span>
+        <ng-container *ngIf="currentTitle else defaultMenu">{{ currentTitle }}</ng-container>
         <ng-template #defaultMenu>
           {{ title }}
         </ng-template>
@@ -25,9 +26,10 @@
         d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
     </svg>
   </header>
-  <header class="row search" *ngIf="isExpand" @fadeInOut>
+
+  <header class="search" *ngIf="isExpand" @fadeInOut>
     <input type="text" #searchBox [placeholder]="searchConfig.placeHolder || ''"
-           [value]="searchTerms.value"
+           [value]="searchTerms.getValue()"
            (input)="searchItems(searchBox.value)"
            (keydown.enter)="searchItems(searchBox.value)">
 
@@ -42,6 +44,7 @@
       </svg>
     </ng-template>
   </header>
+
   <ul class="list">
     <li *ngFor="let item of displayItems;index as i;trackBy:trackById" (click)="clickItem(item,i)"
         [class.selected]="item === selectedItem">
@@ -63,6 +66,7 @@
       </svg>
     </li>
   </ul>
+
   <div class="doc" [ngClass]="docDisplayClass" *ngIf="enableDocPanel">
     <ng-content></ng-content>
   </div>
