@@ -13,9 +13,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/chengyuxing/ngx-dev-project.git"
   },
-  "homepage": "",
+  "homepage": "https://github.com/chengyuxing/ngx-dev-project/blob/main/projects/ngx-menubar/README.md",
   "peerDependencies": {
     "@angular/common": ">=14",
     "@angular/core": ">=14",
@@ -25,5 +25,6 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  }
+  },
+  "sideEffects": false
 }

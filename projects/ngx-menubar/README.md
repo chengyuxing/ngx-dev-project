@@ -94,6 +94,7 @@ export class AppComponent {
 | @Input() title: string                               | 'Menu'                        | Default Top menu title.                                      |
 | @Input() datasource: [IMenuItem](#IMenuItem)[]       | []                            | Menu items.                                                  |
 | @Input() color: string = 'dark';                     | 'dark'                        | Theme color, 'dark' or 'light'.                              |
+| @Input() minimizable: boolean                        | true                          | Enable minimizable or not, if true (expand) will not work.   |
 | @Input() enableDocPanel: boolean                     | false                         | Show bottom doc panel.                                       |
 | @Input() [iconParser](#IconParser): Function;        | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
 | @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |

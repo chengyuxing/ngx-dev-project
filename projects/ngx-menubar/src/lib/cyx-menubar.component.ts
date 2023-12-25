@@ -83,6 +83,10 @@ export class CyxMenubarComponent implements OnInit {
    */
   @Input() color: string = 'dark';
   /**
+   * Enable minimizable or not, if true (expand) will not work.
+   */
+  @Input() minimizable: boolean = true;
+  /**
    * Show bottom doc panel.
    */
   @Input() enableDocPanel: boolean = false;
@@ -237,8 +241,10 @@ export class CyxMenubarComponent implements OnInit {
   }
 
   toggleDisplay() {
-    this.isExpand = !this.isExpand;
-    this.expand.emit(this.isExpand);
+    if (this.minimizable) {
+      this.isExpand = !this.isExpand;
+      this.expand.emit(this.isExpand);
+    }
   }
 
   trackById(_: number, item: IMenuItem) {
