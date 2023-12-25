@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.component";
+import {IMenuItem} from "ngx-sidebar";
 
 @Component({
   selector: 'app-sidebar',

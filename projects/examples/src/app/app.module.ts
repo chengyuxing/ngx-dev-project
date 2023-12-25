@@ -10,7 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TabsWithContentComponent} from './components/tabs-with-content/tabs-with-content.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CyxMenubarComponent} from "../../../ngx-menubar/src/lib/cyx-menubar.component";
+import {CyxMenubarComponent} from "ngx-sidebar";
 
 @NgModule({
   declarations: [
@@ -28,7 +28,6 @@ import {CyxMenubarComponent} from "../../../ngx-menubar/src/lib/cyx-menubar.comp
         MathPipe,
         ZipPipe,
         GroupPipe,
-        CyxMenubarComponent,
         AppRoutingModule,
         BrowserAnimationsModule,
         MatTabsModule,
