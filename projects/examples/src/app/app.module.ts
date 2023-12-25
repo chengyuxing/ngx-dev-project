@@ -10,6 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TabsWithContentComponent} from './components/tabs-with-content/tabs-with-content.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CyxMenubarComponent} from "ngx-menubar";
 
 @NgModule({
   declarations: [
@@ -18,20 +19,21 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     SidebarComponent,
     TabsWithContentComponent
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AjaxGetJsonPipe,
-        PagingPipe,
-        TruncPipe,
-        MathPipe,
-        ZipPipe,
-        GroupPipe,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatTabsModule,
-        CyxMenubarComponent
-    ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AjaxGetJsonPipe,
+    PagingPipe,
+    TruncPipe,
+    MathPipe,
+    ZipPipe,
+    GroupPipe,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
+    CyxMenubarComponent,
+    CyxMenubarComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {IMenuItem} from "ngx-menubar";
 
 @Component({
   selector: 'app-sidebar',
