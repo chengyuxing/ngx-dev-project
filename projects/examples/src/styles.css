@@ -2,3 +2,7 @@
 .label {
   font-family: -apple-system;
 }
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}

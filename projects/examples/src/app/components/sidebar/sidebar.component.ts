@@ -16,16 +16,16 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
   `,
   styles: [
     `
-      .sidebar {
-        width: 350px;
-        height: 500px;
-        transition: width .2s ease-out;
-        box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
-      }
+        .sidebar {
+            width: 350px;
+            height: 500px;
+            transition: width .2s ease-out;
+            box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
+        }
 
-      .sidebar.close {
-        width: 50px;
-      }
+        .sidebar.close {
+            width: 50px;
+        }
     `
   ]
 })

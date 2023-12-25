@@ -4,6 +4,7 @@
   display: inline-block;
   fill: currentColor;
   vertical-align: middle;
+  box-sizing: content-box;
 }
 
 h1, h2 {
@@ -14,6 +15,7 @@ h1, h2 {
 
 .label {
   flex: 1;
+  font-size: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
