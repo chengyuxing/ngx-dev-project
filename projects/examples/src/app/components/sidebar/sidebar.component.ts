@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {IMenuItem} from "../../../../../ngx-sidebar/src/lib/cyx-menubar.component";
+import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.component";
 
 @Component({
   selector: 'app-sidebar',
   template: `
       <div class="sidebar" [class.close]="!sidebar.isExpand">
-          <cyx-menubar #sidebar [title]="'政务管理系统'" [enableDocPanel]="true" color="dark" [datasource]="navs" [iconParser]="parseSvfIcon" (itemClick)="clickItem($event)"
+          <cyx-menubar #sidebar [title]="'政务管理系统'" [enableDocPanel]="true" color="dark"
+                       [datasource]="navs"
+                       [iconParser]="parseSvfIcon"
+                       (itemClick)="clickItem($event)"
                        (expand)="stateChanged($event)">
               {{ item | json }}
           </cyx-menubar>

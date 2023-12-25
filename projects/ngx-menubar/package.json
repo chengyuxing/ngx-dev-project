@@ -1,0 +1,29 @@
+{
+  "name": "ngx-menubar",
+  "version": "1.0.0",
+  "author": "chengyuxing",
+  "description": "Simple basic menubar with step-into view display menu items(not tree view display).",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "sidebar",
+    "menubar",
+    "tree",
+    "menu"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "peerDependencies": {
+    "@angular/common": ">=14",
+    "@angular/core": ">=14",
+    "@angular/animations": ">=14",
+    "@angular/platform-browser": ">=14",
+    "rxjs": "^6.0.0 || ^7.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
