@@ -2,7 +2,8 @@
 
 ## 1.0.9
 
-- New pipe `coalesce`.
+- New pipe `coalesce`;
+- New property: `get$` result: `ResultWrapper#dataAsArray`.
 
 ## 1.0.8
 

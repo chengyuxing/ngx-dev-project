@@ -13,16 +13,26 @@ export class ResultWrapper {
   /**
    * requested raw data.
    */
-  readonly data?: any | any[];
+  readonly data?: any;
   /**
    * request state message.
    */
   readonly message?: string;
 
-  constructor(success: boolean, data: any | any[], message: string) {
+  constructor(success: boolean, data: any, message: string) {
     this.success = success;
     this.data = data;
     this.message = message;
+  }
+
+  /**
+   * Returns raw data as array if data actually type is array, otherwise returns empty array.
+   */
+  get dataAsArray(): any[] {
+    if (this.data && this.data instanceof Array) {
+      return this.data as any[];
+    }
+    return [];
   }
 
   /**
