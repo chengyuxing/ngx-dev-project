@@ -10,7 +10,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {TabsWithContentComponent} from './components/tabs-with-content/tabs-with-content.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CyxMenubarComponent} from "ngx-menubar";
+import {CyxMenubarComponent} from "../../../ngx-menubar/src/lib/cyx-menubar.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import {CyxMenubarComponent} from "ngx-menubar";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    CyxMenubarComponent,
     CyxMenubarComponent
   ],
   providers: [],
