@@ -104,7 +104,7 @@ export class ResultWrapper {
  * ```html
  * <ng-container *ngIf="'https://jsonplaceholder.typicode.com/todos' | get$ | async as result">
  *   <ul *ngIf="result.valid">
- *     <li *ngFor="let item of result.data">
+ *     <li *ngFor="let item of result.dataAsArray">
  *       {{item.title}}
  *     </li>
  *   </ul>
