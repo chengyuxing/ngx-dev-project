@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
@@ -55,9 +55,8 @@ export interface SearchConfig {
   selector: 'cyx-menubar',
   templateUrl: 'cyx-menubar.component.html',
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
-    NgForOf,
-    NgIf
   ],
   styleUrls: ['cyx-menubar.component.scss',
     'cyx-menubar.light.component.scss',

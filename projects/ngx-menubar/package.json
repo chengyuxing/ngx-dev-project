@@ -1,6 +1,6 @@
 {
   "name": "ngx-menubar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "chengyuxing",
   "description": "Simple basic menubar with step-into view display menu items(not tree view display).",
   "license": "MIT",
