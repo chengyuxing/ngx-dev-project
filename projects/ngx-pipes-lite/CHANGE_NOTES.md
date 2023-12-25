@@ -1,5 +1,9 @@
 # Change notes
 
+## 1.1.0
+
+- Fixed doc.
+
 ## 1.0.9
 
 - New pipe `coalesce`;
