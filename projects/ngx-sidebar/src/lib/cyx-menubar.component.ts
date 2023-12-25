@@ -177,6 +177,12 @@ export class CyxMenubarComponent implements OnInit {
     const flatting = (items: IMenuItem[]): IMenuItem[] => {
       return items.reduce((acc: IMenuItem[], curr) => {
         if (curr.children && curr.children.length > 0) {
+          acc.push({
+            id: curr.id,
+            title: curr.title,
+            icon: curr.icon,
+            data: curr.data
+          });
           return acc.concat(flatting(curr.children));
         }
         acc.push(curr);
