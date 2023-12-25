@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {animate, state, style, transition, trigger} from "@angular/animations";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, map} from "rxjs";
 
@@ -58,13 +57,7 @@ export interface SearchConfig {
   ],
   styleUrls: ['cyx-menubar.component.scss',
     'cyx-menubar.light.component.scss',
-    'cyx-menubar.dark.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      state('void', style({opacity: 0})),
-      transition(':leave, :enter', [animate(200)])
-    ])
-  ]
+    'cyx-menubar.dark.component.scss']
 })
 export class CyxMenubarComponent implements OnInit {
   /**
