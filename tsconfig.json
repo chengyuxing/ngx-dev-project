@@ -15,8 +15,8 @@
       "ngx-pipes-lite": [
         "dist/ngx-pipes-lite"
       ],
-      "ngx-sidebar": [
-        "dist/ngx-sidebar"
+      "ngx-menubar": [
+        "dist/ngx-menubar"
       ]
     },
     "declaration": false,

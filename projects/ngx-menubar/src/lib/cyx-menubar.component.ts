@@ -6,7 +6,7 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, map} from "rxjs";
 
 /**
- * Sidebar menu item type.
+ * Menubar menu item type.
  */
 export interface IMenuItem {
   id: number | string;
@@ -113,7 +113,7 @@ export class CyxMenubarComponent implements OnInit {
     predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
   }
   /**
-   * Sidebar display state change event.
+   * Menubar display state change event.
    */
   @Output() expand: EventEmitter<boolean> = new EventEmitter<boolean>();
   /**

@@ -90,7 +90,7 @@ export class AppComponent {
 ## Directives
 
 | Name                                                 | Default value                 | Description                                                  |
-| ---------------------------------------------------- | ----------------------------- | ------------------------------------------------------------ |
+| ---------------------------------------------------- | ----------------------------- |--------------------------------------------------------------|
 | @Input() title: string                               | 'Menu'                        | Default Top menu title.                                      |
 | @Input() datasource: [IMenuItem](#IMenuItem)[]       | []                            | Menu items.                                                  |
 | @Input() color: string = 'dark';                     | 'dark'                        | Theme color, 'dark' or 'light'.                              |
@@ -98,7 +98,7 @@ export class AppComponent {
 | @Input() enableDocPanel: boolean                     | false                         | Show bottom doc panel.                                       |
 | @Input() [iconParser](#IconParser): Function;        | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
 | @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |
-| @Output() expand: EventEmitter&lt;boolean&gt;        |                               | Sidebar display state change event.                          |
+| @Output() expand: EventEmitter&lt;boolean&gt;        |                               | Menubar display state change event.                          |
 | @Output() itemClick: EventEmitter&lt;IMenuItem&gt;   |                               | Menu item click event.                                       |
 
 ## Properties
@@ -128,7 +128,7 @@ icon => `<svg viewBox="...">...</svg>`
 
 ### IMenuItem
 
-Sidebar menu item type.
+Menubar menu item type.
 
 ```typescript
 export interface IMenuItem {

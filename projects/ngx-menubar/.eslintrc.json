@@ -10,8 +10,8 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/ngx-sidebar/tsconfig.lib.json",
-          "projects/ngx-sidebar/tsconfig.spec.json"
+          "projects/ngx-menubar/tsconfig.lib.json",
+          "projects/ngx-menubar/tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
