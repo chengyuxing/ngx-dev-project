@@ -1,5 +1,9 @@
 # Change notes
 
+## 1.0.4
+
+- Update doc.
+
 ## 1.0.3
 
 - Remove animation @fadeInOut;
