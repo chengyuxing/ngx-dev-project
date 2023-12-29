@@ -5,6 +5,8 @@ Simple basic menubar with step-into view display menu items(not tree view displa
 This component without size change while state changed, as you can define in your
 custom parent element as more freedom.
 
+Open [Menubar](https://stackblitz.com/edit/stackblitz-starters-pnujrb?file=src%2Fmain.ts) demo preview.
+
 ## Installation
 
 1. Install: `npm i ngx-menubar`;
