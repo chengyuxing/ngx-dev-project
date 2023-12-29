@@ -138,10 +138,6 @@ export class CyxMenubarComponent implements OnInit {
     return this.indices.length === 0;
   }
 
-  get docDisplayClass(): string {
-    return this.isExpand ? 'show' : 'hide';
-  }
-
   protected readonly searchTerms = new BehaviorSubject<string>('');
 
   constructor(private sanitizer: DomSanitizer) {

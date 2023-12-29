@@ -68,7 +68,7 @@
     </li>
   </ul>
 
-  <div class="doc" [ngClass]="docDisplayClass" *ngIf="enableDocPanel">
+  <div class="doc" *ngIf="enableDocPanel && isExpand">
     <ng-content></ng-content>
   </div>
 </div>

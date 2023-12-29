@@ -4,28 +4,69 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
 @Component({
   selector: 'app-sidebar',
   template: `
-      <div class="sidebar" [class.close]="!sidebar.isExpand">
-          <cyx-menubar #sidebar [title]="'政务管理系统'" [enableDocPanel]="true" color="dark"
-                       [datasource]="navs"
-                       [iconParser]="parseSvfIcon"
-                       (itemClick)="clickItem($event)"
-                       (expand)="stateChanged($event)">
-              {{ item | json }}
-          </cyx-menubar>
+    <div class="container">
+      <aside [class.close]="!menubar.isExpand">
+        <cyx-menubar
+          #menubar
+          [datasource]="navs"
+          [iconParser]="parseSvfIcon"
+          [enableDocPanel]="true"
+          [color]="'dark'">
+          {{ menubar.selectedItem | json }}
+          <br>
+          Initial Chunk Files | Names | Raw Size
+          main.js | main | 90.53 kB |
+          runtime.js | runtime | 6.51 kB |
+        </cyx-menubar>
+      </aside>
+      <div class="content">
+        <pre>
+  Build at: 2023-12-29T03:22:17.122Z - Hash: 48125fe696ac6cf7 - Time: 170ms
+
+  ✔ Compiled successfully.
+  ✔ Browser application bundle generation complete.
+
+  Initial Chunk Files | Names   | Raw Size
+  main.js             | main    | 90.53 kB |
+  runtime.js          | runtime |  6.51 kB |
+
+  3 unchanged chunks
+
+  Build at: 2023-12-29T03:22:51.314Z - Hash: e0a24afe57e23719 - Time: 168ms
+
+  ✔ Compiled successfully.
+        </pre>
       </div>
+    </div>
+
   `,
   styles: [
     `
-        .sidebar {
-            width: 350px;
-            height: 500px;
-            transition: width .2s ease-out;
-            box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
-        }
+      .container {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        align-items: stretch;
+        height: 500px;
+      }
+      aside {
+        flex: 1 0 300px;
+        width: 300px;
+        transition: flex 0.2s ease-out;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.45);
+      }
 
-        .sidebar.close {
-            width: 50px;
-        }
+      aside.close {
+        flex: 0 50px;
+      }
+
+      .content {
+        flex: 8 800px;
+        display: flex;
+        flex-flow: column;
+        padding: 10px;
+      }
+
     `
   ]
 })

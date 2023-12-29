@@ -221,23 +221,3 @@ h1, h2 {
     line-height: 1.4em;
   }
 }
-
-.hide {
-  overflow: hidden;
-  visibility: hidden;
-  opacity: 0;
-  max-height: 0;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  transition: visibility 5ms, opacity 5ms, max-height 2ms;
-  transition-timing-function: ease-out;
-}
-
-.show {
-  visibility: visible;
-  opacity: 1;
-  max-height: 5000px;
-  transition: max-height 2ms, visibility .8s, opacity .8s;
-  transition-timing-function: ease-in-out;
-}
