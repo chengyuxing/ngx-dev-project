@@ -73,7 +73,7 @@ export class CyxMenubarComponent implements OnInit {
    */
   @Input() color: string = 'dark';
   /**
-   * Enable minimizable or not, if true (expand) will not work.
+   * Enable minimizable or not, if false (expand) will not work.
    */
   @Input() minimizable: boolean = true;
   /**

@@ -28,7 +28,8 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/ngx-pipes-lite/tsconfig.spec.json",
-            "polyfills": "projects/ngx-pipes-lite/src/polyfills.ts"
+            "polyfills": "projects/ngx-pipes-lite/src/polyfills.ts",
+            "main": "projects/ngx-pipes-lite/src/test.ts"
           }
         },
         "lint": {

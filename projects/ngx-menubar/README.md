@@ -2,7 +2,7 @@
 
 Simple basic menubar with step-into view display menu items(not tree view display).
 
-This component without animation while state changed, as you can define in your
+This component without size change while state changed, as you can define in your
 custom parent element as more freedom.
 
 ## Installation
@@ -90,13 +90,13 @@ export class AppComponent {
 ## Directives
 
 | Name                                                 | Default value                 | Description                                                  |
-| ---------------------------------------------------- | ----------------------------- |--------------------------------------------------------------|
+|------------------------------------------------------|-------------------------------|--------------------------------------------------------------|
 | @Input() title: string                               | 'Menu'                        | Default Top menu title.                                      |
 | @Input() datasource: [IMenuItem](#IMenuItem)[]       | []                            | Menu items.                                                  |
-| @Input() color: string = 'dark';                     | 'dark'                        | Theme color, 'dark' or 'light'.                              |
-| @Input() minimizable: boolean                        | true                          | Enable minimizable or not, if true (expand) will not work.   |
+| @Input() color: string                               | 'dark'                        | Theme color, 'dark' or 'light'.                              |
+| @Input() minimizable: boolean                        | true                          | Enable minimizable or not, if false (expand) will not work.  |
 | @Input() enableDocPanel: boolean                     | false                         | Show bottom doc panel.                                       |
-| @Input() [iconParser](#IconParser): Function;        | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
+| @Input() [iconParser](#IconParser): Function         | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
 | @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |
 | @Output() expand: EventEmitter&lt;boolean&gt;        |                               | Menubar display state change event.                          |
 | @Output() itemClick: EventEmitter&lt;IMenuItem&gt;   |                               | Menu item click event.                                       |
@@ -107,8 +107,8 @@ export class AppComponent {
 |-------------------------|---------------|-------------------------------|
 | selectedItem: IMenuItem | null          | Selected item.                |
 | isExpand: boolean       | true          | Is menubar expanded or not.   |
-| `get` isTopMenu         |               | Is menu top level.            |
-| `get` docDisplayClass   |               | Doc panel display class name. |
+| `get` isTopMenu         | true          | Is menu top level.            |
+| `get` docDisplayClass   | 'hide'        | Doc panel display class name. |
 
 ## Appendix
 
@@ -154,6 +154,8 @@ export interface SearchConfig {
 ```typescript
 {
   placeHolder: 'search',
-  predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
+    predicate
+:
+  (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
 }
 ```
