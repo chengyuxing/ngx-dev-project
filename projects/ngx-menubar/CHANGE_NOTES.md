@@ -1,5 +1,9 @@
 # Change notes
 
+## 1.0.5
+
+- Bottom panel optimize in flex layout.
+
 ## 1.0.4
 
 - Update doc.
