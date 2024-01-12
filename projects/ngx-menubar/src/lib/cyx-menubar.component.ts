@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {BehaviorSubject, debounceTime, distinctUntilChanged, map} from "rxjs";
@@ -59,7 +59,7 @@ export interface SearchConfig {
     'cyx-menubar.light.component.scss',
     'cyx-menubar.dark.component.scss']
 })
-export class CyxMenubarComponent implements OnInit {
+export class CyxMenubarComponent implements OnInit, OnChanges {
   /**
    * Default Top menu title.
    */
@@ -141,6 +141,12 @@ export class CyxMenubarComponent implements OnInit {
   protected readonly searchTerms = new BehaviorSubject<string>('');
 
   constructor(private sanitizer: DomSanitizer) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['datasource']) {
+      setTimeout(() => this.doFlatDatasource(this.datasource), 1);
+    }
   }
 
   ngOnInit(): void {

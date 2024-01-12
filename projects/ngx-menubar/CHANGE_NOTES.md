@@ -1,5 +1,8 @@
 # Change notes
 
+## 1.0.6
+- Update datasource when on changes.
+
 ## 1.0.5
 
 - Bottom panel optimize in flex layout.

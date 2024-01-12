@@ -12,11 +12,13 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
           [iconParser]="parseSvfIcon"
           [enableDocPanel]="true"
           [color]="'dark'">
-          {{ menubar.selectedItem | json }}
           <br>
-          Initial Chunk Files | Names | Raw Size
-          main.js | main | 90.53 kB |
-          runtime.js | runtime | 6.51 kB |
+          {{ menubar.selectedItem | json }}
+          <div>
+            Initial Chunk Files | Names | Raw Size
+            main.js | main | 90.53 kB |
+            runtime.js | runtime | 6.51 kB |
+          </div>
         </cyx-menubar>
       </aside>
       <div class="content">
