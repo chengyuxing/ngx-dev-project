@@ -1,7 +1,7 @@
 <div class="menubar" [ngClass]="color">
   <header>
     <div class="backrow" (click)="backward()">
-      <svg id="menu" viewBox="0 0 542.187 461.8" class="icon back" *ngIf="isTopMenu || !isExpand else backIcon">
+      <svg id="menu" viewBox="0 0 542.187 461.8" class="icon back" *ngIf="isTopMenu else backIcon">
         <g>
           <path
             d="M184.508 112.461V1.656h357.677v110.805H184.508M184.508 287.127V176.329h357.679v110.798H184.508M184.508 461.8V351h357.681v110.8H184.508M116.022 58.001c0 32.044-25.974 58.011-58.012 58.011C25.973 116.012 0 90.045 0 58.002 0 25.961 25.973-.005 58.01-.005c32.038 0 58.012 25.967 58.012 58.005M116.022 224.827c0 32.037-25.974 58.01-58.012 58.01-32.037 0-58.01-25.973-58.01-58.01 0-32.036 25.973-58.011 58.01-58.011 32.038 0 58.012 25.975 58.012 58.01M116.022 403.357c0 32.038-25.974 58.011-58.012 58.011-32.037 0-58.01-25.973-58.01-58.01 0-32.04 25.973-58.01 58.01-58.01 32.038 0 58.012 25.97 58.012 58.01"></path>
@@ -13,21 +13,16 @@
         </svg>
       </ng-template>
 
-      <h1 class="label" *ngIf="isExpand">
+      <h1 class="label">
         <ng-container *ngIf="currentTitle else defaultMenu">{{ currentTitle }}</ng-container>
         <ng-template #defaultMenu>
           {{ title }}
         </ng-template>
       </h1>
     </div>
-    <svg id="close" viewBox="0 0 18 18" class="small icon close" *ngIf="minimizable && isExpand"
-         (click)="toggleDisplay()">
-      <path
-        d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
-    </svg>
   </header>
 
-  <header class="search" *ngIf="isExpand">
+  <header class="search">
     <input type="text" #searchBox [placeholder]="searchConfig.placeHolder || ''"
            [value]="searchTerms.getValue()"
            (input)="searchItems(searchBox.value)"
@@ -59,16 +54,16 @@
               d="M480.276-96Q401-96 331-126q-70-30-122.5-82.5T126-330.958q-30-69.959-30-149.5Q96-560 126-629.5t82.5-122Q261-804 330.958-834q69.959-30 149.5-30Q560-864 629.5-834t122 82.5Q804-699 834-629.276q30 69.725 30 149Q864-401 834-331q-30 70-82.5 122.5T629.276-126q-69.725 30-149 30Z"/>
           </svg>
         </ng-template>
-        <span class="label" *ngIf="isExpand">{{ item.title }}</span>
+        <span class="label">{{ item.title }}</span>
       </div>
       <svg id="arrowright" class="small icon" viewBox="0 0 14.2 21"
-           *ngIf="(item.children && item.children.length > 0) && isExpand">
+           *ngIf="(item.children && item.children.length > 0)">
         <path d="M14.2 10.5L3.7 0 0 3.7l6.8 6.8L0 17.3 3.7 21z"></path>
       </svg>
     </li>
   </ul>
 
-  <div class="doc" *ngIf="enableDocPanel && isExpand">
+  <div class="doc" *ngIf="showDocPanel">
     <ng-content></ng-content>
   </div>
 </div>

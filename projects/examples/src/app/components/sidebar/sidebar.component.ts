@@ -5,14 +5,15 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
   selector: 'app-sidebar',
   template: `
     <div class="container">
-      <aside [class.close]="!menubar.isExpand">
+      <aside>
         <cyx-menubar
           #menubar
           [datasource]="navs"
           [iconParser]="parseSvfIcon"
-          [enableDocPanel]="true"
-          [color]="'dark'">
-          <br>
+          [showDocPanel]="true"
+          [color]="'dark'"
+          [active]="51"
+          (itemClick)="clickItem($event)">
           {{ menubar.selectedItem | json }}
           <div>
             Initial Chunk Files | Names | Raw Size
@@ -54,7 +55,7 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
       aside {
         flex: 1 0 300px;
         width: 300px;
-        transition: flex 0.2s ease-out;
+        /*transition: flex 0.2s ease-out;*/
         box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.45);
       }
 
@@ -74,7 +75,7 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
 })
 export class SidebarComponent implements OnInit {
   navs: IMenuItem[] = [
-    {id: 1, title: 'runtime', icon: 'deployed_code', children: []},
+    {id: 1, title: 'runtime', icon: '', children: []},
     {
       id: 2, title: 'main', children: [
         {id: 5, title: 'app-routing.module.ts', children: []},
@@ -119,11 +120,6 @@ export class SidebarComponent implements OnInit {
   clickItem(item: IMenuItem) {
     this.item = item;
     console.log(item);
-  }
-
-  stateChanged(state: boolean) {
-    this.sidebarState = state;
-    console.log(state);
   }
 
   parseSvfIcon(icon: string): string {

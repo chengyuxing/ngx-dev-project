@@ -24,25 +24,17 @@ export interface SearchConfig {
 
 /**
  * Simple basic menubar with step-into view display menu items(not tree view display).
- * ### Notice:
- * This component without animation while state changed, as you can define in your
- * custom parent element as more freedom.
  * @usageNotes
- * Example with width change animation:
  * ```html
  * <style>
  *   .container {
  *      width: 350px;
  *      height: 500px;
- *      transition: width .2s ease-out;
  *      box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
- *   }
- *   .container.close {
- *      width: 50px;
  *   }
  * </style>
  *
- * <div class="container" [class.close]="!menubar.isExpand">
+ * <div class="container">
  *  <cyx-menubar #menubar [datasource]="navs"></cyx-menubar>
  * </div>
  * ```
@@ -73,13 +65,9 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
    */
   @Input() color: string = 'dark';
   /**
-   * Enable minimizable or not, if false (expand) will not work.
-   */
-  @Input() minimizable: boolean = true;
-  /**
    * Show bottom doc panel.
    */
-  @Input() enableDocPanel: boolean = false;
+  @Input() showDocPanel: boolean = false;
   /**
    * Parse icon which from menu item data field {@link IMenuItem#icon}, e.g.
    * ```javascript
@@ -103,9 +91,9 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
     predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
   }
   /**
-   * Menubar display state change event.
+   * Active item id.
    */
-  @Output() expand: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() active?: number | string;
   /**
    * Menu item click event.
    */
@@ -119,10 +107,6 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
    * Selected item.
    */
   selectedItem: IMenuItem | null = null;
-  /**
-   * Is menubar expanded or not.
-   */
-  isExpand: boolean = true;
 
   private searchPredicate!: (keyword: string, item: IMenuItem) => boolean;
 
@@ -145,13 +129,21 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['datasource']) {
-      setTimeout(() => this.doFlatDatasource(this.datasource), 1);
+      this.doFlatDatasource(this.datasource);
+    }
+    if (changes['active'] && this.active) {
+      this.doActiveItemById(this.active);
     }
   }
 
   ngOnInit(): void {
-    this.currentChildren = this.datasource;
-    this._displayItems = this.currentChildren;
+    this.doFlatDatasource(this.datasource);
+    if (this.active) {
+      this.doActiveItemById(this.active);
+    } else {
+      this.currentChildren = this.datasource;
+      this._displayItems = this.currentChildren;
+    }
     this.searchPredicate = this.searchConfig.predicate || (() => true);
 
     this.searchTerms.pipe(
@@ -165,8 +157,14 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
       }
       this._displayItems = this.currentChildren;
     });
+  }
 
-    setTimeout(() => this.doFlatDatasource(this.datasource), 1);
+  protected doActiveItemById(id: number | string) {
+    const activeItem = this.flattenItems.find(i => i.id === id);
+    if (activeItem) {
+      this.currentChildren = [activeItem];
+      this._displayItems = this.currentChildren;
+    }
   }
 
   private doFlatDatasource(datasource: IMenuItem[]) {
@@ -177,7 +175,8 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
             id: curr.id,
             title: curr.title,
             icon: curr.icon,
-            data: curr.data
+            data: curr.data,
+            children: curr.children,
           });
           return acc.concat(flatting(curr.children));
         }
@@ -188,13 +187,12 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
     this.flattenItems = flatting(datasource);
   }
 
-  iconHTML(icon: string): SafeHtml {
+  protected iconHTML(icon: string): SafeHtml {
     const iconHTMLString = this.iconParser(icon);
     return this.sanitizer.bypassSecurityTrustHtml(iconHTMLString);
   }
 
   protected clickItem(item: IMenuItem, index: number) {
-    this.isExpand = true;
     this.selectedItem = item;
     if (item.children && item.children.length > 0) {
       this.indices.push(index);
@@ -205,15 +203,7 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
     this.itemClick.emit(item);
   }
 
-  backward() {
-    if (this.isTopMenu) {
-      this.toggleDisplay();
-      return;
-    }
-    if (!this.isExpand) {
-      this.toggleDisplay();
-      return;
-    }
+  protected backward() {
     this.indices.pop();
     if (this.isTopMenu) {
       this.currentTitle = null;
@@ -232,18 +222,11 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
     this._displayItems = this.currentChildren;
   }
 
-  toggleDisplay() {
-    if (this.minimizable) {
-      this.isExpand = !this.isExpand;
-      this.expand.emit(this.isExpand);
-    }
-  }
-
-  trackById(_: number, item: IMenuItem) {
+  protected trackById(_: number, item: IMenuItem) {
     return item.id;
   }
 
-  searchItems(value: string) {
+  protected searchItems(value: string) {
     this.searchTerms.next(value);
   }
 }
