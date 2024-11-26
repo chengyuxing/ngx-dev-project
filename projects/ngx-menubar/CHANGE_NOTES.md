@@ -1,5 +1,10 @@
 # Change notes
 
+## 1.0.7
+
+- Some optimized.
+- Remove minimized.
+
 ## 1.0.6
 - Update datasource when on changes.
 

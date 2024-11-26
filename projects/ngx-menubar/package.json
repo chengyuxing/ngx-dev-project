@@ -1,6 +1,6 @@
 {
   "name": "ngx-menubar",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "chengyuxing",
   "description": "Simple basic menubar with step-into view display menu items(not tree view display) for angular14+.",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "@angular/common": ">=14",
     "@angular/core": ">=14",
     "@angular/platform-browser": ">=14",
-    "rxjs": "^6.0.0 || ^7.0.0"
+    "rxjs": "^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

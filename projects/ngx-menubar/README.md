@@ -2,9 +2,6 @@
 
 Simple basic menubar with step-into view display menu items(not tree view display).
 
-This component without size change while state changed, as you can define in your
-custom parent element as more freedom.
-
 Open [Menubar](https://stackblitz.com/edit/stackblitz-starters-pnujrb?file=src%2Fmain.ts) demo preview.
 
 ## Installation
@@ -50,12 +47,7 @@ Open [Menubar](https://stackblitz.com/edit/stackblitz-starters-pnujrb?file=src%2
 .container {
   width: 350px;
   height: 500px;
-  transition: width .2s ease-out;
   box-shadow: 1px 2px 8px rgba(0, 0, 0, .45);
-}
-
-.container.close {
-  width: 50px;
 }
 ```
 
@@ -63,9 +55,9 @@ Open [Menubar](https://stackblitz.com/edit/stackblitz-starters-pnujrb?file=src%2
 
 ```html
 
-<div class="container" [class.close]="!menubar.isExpand">
+<div class="container">
   <cyx-menubar #menubar [datasource]="items">
-    <!-- some elements can be here if property 'enableDocPanel' set to true. -->
+    <!-- some elements can be here if property 'showDocPanel' set to true. -->
   </cyx-menubar>
 </div>
 ```
@@ -73,6 +65,7 @@ Open [Menubar](https://stackblitz.com/edit/stackblitz-starters-pnujrb?file=src%2
 `app.component.ts`
 
 ```typescript
+
 @Component({...})
 export class AppComponent {
   items: IMenuItem[] = [
@@ -96,21 +89,18 @@ export class AppComponent {
 | @Input() title: string                               | 'Menu'                        | Default Top menu title.                                      |
 | @Input() datasource: [IMenuItem](#IMenuItem)[]       | []                            | Menu items.                                                  |
 | @Input() color: string                               | 'dark'                        | Theme color, 'dark' or 'light'.                              |
-| @Input() minimizable: boolean                        | true                          | Enable minimizable or not, if false (expand) will not work.  |
-| @Input() enableDocPanel: boolean                     | false                         | Show bottom doc panel.                                       |
+| @Input() active: string \| number                    | null                          | current active menu item id.                                 |
+| @Input() showDocPanel: boolean                       | false                         | Show bottom doc panel.                                       |
 | @Input() [iconParser](#IconParser): Function         | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
 | @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |
-| @Output() expand: EventEmitter&lt;boolean&gt;        |                               | Menubar display state change event.                          |
 | @Output() itemClick: EventEmitter&lt;IMenuItem&gt;   |                               | Menu item click event.                                       |
 
 ## Properties
 
-| Name                    | Default value | Description                   |
-|-------------------------|---------------|-------------------------------|
-| selectedItem: IMenuItem | null          | Selected item.                |
-| isExpand: boolean       | true          | Is menubar expanded or not.   |
-| `get` isTopMenu         | true          | Is menu top level.            |
-| `get` docDisplayClass   | 'hide'        | Doc panel display class name. |
+| Name                    | Default value | Description        |
+|-------------------------|---------------|--------------------|
+| selectedItem: IMenuItem | null          | Selected item.     |
+| `get` isTopMenu         | true          | Is menu top level. |
 
 ## Appendix
 
@@ -155,9 +145,7 @@ export interface SearchConfig {
 
 ```typescript
 {
-  placeHolder: 'search',
-    predicate
-:
-  (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
+  placeHolder: 'search', 
+  predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
 }
 ```
