@@ -69,6 +69,10 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
    */
   @Input() showDocPanel: boolean = false;
   /**
+   * Show menu icon.
+   */
+  @Input() showMenuIcon: boolean = true;
+  /**
    * Parse icon which from menu item data field {@link IMenuItem#icon}, e.g.
    * ```javascript
    *  // menu item data.
@@ -98,17 +102,12 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
    * Menu item click event.
    */
   @Output() itemClick: EventEmitter<IMenuItem> = new EventEmitter<IMenuItem>();
-  /**
-   * Close icon click event.
-   */
-  @Output() close = new EventEmitter();
 
   protected indices: number[] = [];
   protected currentTitle?: string | null = null;
   protected currentChildren: IMenuItem[] = [];
   protected flattenItems: IMenuItem[] = [];
 
-  isClosed: boolean = false;
   /**
    * Selected item.
    */
@@ -199,7 +198,6 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
   }
 
   protected clickItem(item: IMenuItem, index: number) {
-    this.isClosed = false;
     this.selectedItem = item;
     if (item.children && item.children.length > 0) {
       this.indices.push(index);
@@ -210,17 +208,7 @@ export class CyxMenubarComponent implements OnInit, OnChanges {
     this.itemClick.emit(item);
   }
 
-  protected clickClose() {
-    this.isClosed = true;
-    this.close.emit();
-  }
-
   protected backward() {
-    if (this.isTopMenu || this.isClosed) {
-      this.isClosed = false;
-      return;
-    }
-    this.isClosed = false;
     this.indices.pop();
     if (this.isTopMenu) {
       this.currentTitle = null;

@@ -1,5 +1,9 @@
 # Change notes
 
+## 1.0.9
+
+- Some optimized.
+
 ## 1.0.8
 
 - Add click icon.

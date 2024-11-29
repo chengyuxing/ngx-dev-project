@@ -4,25 +4,29 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
 @Component({
   selector: 'app-sidebar',
   template: `
-    <div class="container">
-      <aside>
-        <cyx-menubar
-          #menubar
-          [datasource]="navs"
-          [iconParser]="parseSvfIcon"
-          [showDocPanel]="true"
-          [color]="'dark'"
-          (itemClick)="clickItem($event)">
-          {{ menubar.selectedItem | json }}
-          <div>
-            Initial Chunk Files | Names | Raw Size
-            main.js | main | 90.53 kB |
-            runtime.js | runtime | 6.51 kB |
-          </div>
-        </cyx-menubar>
-      </aside>
-      <div class="content">
-        <pre>
+    <mat-drawer-container class="container" autosize>
+      <mat-drawer #drawer mode="side" opened>
+        <nav>
+          <cyx-menubar
+            #menubar
+            [datasource]="navs"
+            [iconParser]="parseSvfIcon"
+            [showDocPanel]="true"
+            [showMenuIcon]="true"
+            [color]="'dark'"
+            (itemClick)="clickItem($event)">
+            {{ menubar.selectedItem | json }}
+            <div>
+              Initial Chunk Files | Names | Raw Size
+              main.js | main | 90.53 kB |
+              runtime.js | runtime | 6.51 kB |
+            </div>
+          </cyx-menubar>
+        </nav>
+      </mat-drawer>
+      <mat-drawer-content>
+        <main class="content">
+            <pre (click)="drawer.toggle()">
   Build at: 2023-12-29T03:22:17.122Z - Hash: 48125fe696ac6cf7 - Time: 170ms
 
   ✔ Compiled successfully.
@@ -38,35 +42,29 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
 
   ✔ Compiled successfully.
         </pre>
-      </div>
-    </div>
+        </main>
+      </mat-drawer-content>
+    </mat-drawer-container>
 
   `,
   styles: [
     `
       .container {
-        flex: 1;
-        min-height: 0;
-        display: flex;
-        align-items: stretch;
-        height: 500px;
-      }
-      aside {
-        flex: 1 0 300px;
-        width: 300px;
-        /*transition: flex 0.2s ease-out;*/
-        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.45);
+        width: auto;
+        height: 100%;
       }
 
-      aside.close {
-        flex: 0 50px;
+      mat-drawer {
+        width: 300px;
+
+        nav {
+          width: 298px;
+          height: 100%;
+        }
       }
 
       .content {
-        flex: 8 800px;
-        display: flex;
-        flex-flow: column;
-        padding: 10px;
+        height: 100%;
       }
 
     `

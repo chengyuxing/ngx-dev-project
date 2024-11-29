@@ -91,10 +91,10 @@ export class AppComponent {
 | @Input() color: string                               | 'dark'                        | Theme color, 'dark' or 'light'.                              |
 | @Input() active: string \| number                    | null                          | current active menu item id.                                 |
 | @Input() showDocPanel: boolean                       | false                         | Show bottom doc panel.                                       |
+| @Input() showMenuIcon: boolean                       | true                          | Show menu icon.                                              |
 | @Input() [iconParser](#IconParser): Function         | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
 | @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |
 | @Output() itemClick: EventEmitter&lt;IMenuItem&gt;   |                               | Menu item click event.                                       |
-| @Output() close: EventEmitter                        |                               | Close icon click event.                                      |
 
 ## Properties
 

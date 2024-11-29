@@ -1,46 +1,37 @@
 <div class="menubar" [ngClass]="color">
   <header>
     <div class="backrow" (click)="backward()">
-      <svg id="menu" viewBox="0 0 542.187 461.8" class="icon back"
-           *ngIf="isTopMenu || isClosed else backIcon">
+      <svg viewBox="0 0 542.187 461.8" class="icon" *ngIf="isTopMenu && showMenuIcon">
         <g>
           <path
             d="M184.508 112.461V1.656h357.677v110.805H184.508M184.508 287.127V176.329h357.679v110.798H184.508M184.508 461.8V351h357.681v110.8H184.508M116.022 58.001c0 32.044-25.974 58.011-58.012 58.011C25.973 116.012 0 90.045 0 58.002 0 25.961 25.973-.005 58.01-.005c32.038 0 58.012 25.967 58.012 58.005M116.022 224.827c0 32.037-25.974 58.01-58.012 58.01-32.037 0-58.01-25.973-58.01-58.01 0-32.036 25.973-58.011 58.01-58.011 32.038 0 58.012 25.975 58.012 58.01M116.022 403.357c0 32.038-25.974 58.011-58.012 58.011-32.037 0-58.01-25.973-58.01-58.01 0-32.04 25.973-58.01 58.01-58.01 32.038 0 58.012 25.97 58.012 58.01"></path>
         </g>
       </svg>
-      <ng-template #backIcon>
-        <svg id="arrowleft" viewBox="0 0 14.2 21" class="icon back">
-          <path d="M10.5 21l3.7-3.7-6.8-6.8 6.8-6.8L10.5 0 0 10.5z"></path>
-        </svg>
-      </ng-template>
-
-      <h1 class="label" *ngIf="!isClosed">
+      <svg viewBox="0 0 14.2 21" class="icon" *ngIf="!isTopMenu">
+        <path d="M10.5 21l3.7-3.7-6.8-6.8 6.8-6.8L10.5 0 0 10.5z"></path>
+      </svg>
+      <h1 class="label" [class.no-icon-title]="!showMenuIcon && isTopMenu">
         <ng-container *ngIf="currentTitle else defaultMenu">{{ currentTitle }}</ng-container>
         <ng-template #defaultMenu>
           {{ title }}
         </ng-template>
       </h1>
     </div>
-    <svg id="close" viewBox="0 0 18 18" class="small icon close" *ngIf="!isClosed"
-         (click)="clickClose()">
-      <path
-        d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
-    </svg>
   </header>
 
-  <header class="search" *ngIf="!isClosed">
+  <header class="search">
     <input type="text" #searchBox [placeholder]="searchConfig.placeHolder || ''"
            [value]="searchTerms.getValue()"
            (input)="searchItems(searchBox.value)"
            (keydown.enter)="searchItems(searchBox.value)">
 
-    <svg *ngIf="searchBox.value else queryIcon" id="arrowleft" viewBox="0 0 18 18" class="icon small"
+    <svg *ngIf="searchBox.value else queryIcon" viewBox="0 0 18 18" class="icon small"
          (click)="searchBox.value = '';searchBox.focus();searchTerms.next('');">
       <path
         d="M12.2 9l5.6-5.6c.2-.2.2-.6 0-.8L15.4.2c-.2-.2-.6-.2-.8 0L9 5.8 3.4.2c-.2-.2-.6-.2-.8 0L.2 2.5c-.2.2-.2.6 0 .8L5.8 9 .2 14.6c-.2.2-.2.6 0 .8l2.4 2.4c.2.2.6.2.8 0L9 12.2l5.6 5.6c.2.2.6.2.8 0l2.4-2.4c.2-.2.2-.6 0-.8L12.2 9z"></path>
     </svg>
     <ng-template #queryIcon>
-      <svg id="search" viewBox="0 0 594.573 594.107" class="icon small" (click)="searchBox.focus()">
+      <svg viewBox="0 0 594.573 594.107" class="icon small" (click)="searchBox.focus()">
         <path
           d="M234.513 411.179c-96.785-.622-175.027-79.878-174.416-176.67.62-96.172 79.352-174.416 175.5-174.421l1.174.003c46.889.294 90.857 18.832 123.8 52.198 32.94 33.367 50.918 77.57 50.616 124.468-.296 46.687-18.703 90.524-51.823 123.42-33.112 32.894-77.04 51.003-123.69 51.003zm351.942 89.513l-3.588-3.585.008-.003-143.352-143.363c19.917-34.312 31.488-74.086 31.76-116.601C472.117 106.987 367.296.816 237.152-.003c-.525-.002-1.035-.002-1.557-.002C106.18 0 .838 104.516.005 234.125-.82 364.271 104.003 470.44 234.133 471.271c.519.002 1.022.005 1.54.005 43.258 0 83.795-11.72 118.664-32.1l143.226 143.241.013-.012 3.581 3.58c10.834 10.832 28.391 10.823 39.219 0l46.079-46.072c10.822-10.822 10.829-28.39 0-39.22"></path>
       </svg>
@@ -60,16 +51,16 @@
               d="M480.276-96Q401-96 331-126q-70-30-122.5-82.5T126-330.958q-30-69.959-30-149.5Q96-560 126-629.5t82.5-122Q261-804 330.958-834q69.959-30 149.5-30Q560-864 629.5-834t122 82.5Q804-699 834-629.276q30 69.725 30 149Q864-401 834-331q-30 70-82.5 122.5T629.276-126q-69.725 30-149 30Z"/>
           </svg>
         </ng-template>
-        <span class="label" *ngIf="!isClosed">{{ item.title }}</span>
+        <span class="label">{{ item.title }}</span>
       </div>
-      <svg id="arrowright" class="small icon" viewBox="0 0 14.2 21"
-           *ngIf="(item.children && item.children.length > 0) && !isClosed">
+      <svg class="small icon" viewBox="0 0 14.2 21"
+           *ngIf="(item.children && item.children.length > 0)">
         <path d="M14.2 10.5L3.7 0 0 3.7l6.8 6.8L0 17.3 3.7 21z"></path>
       </svg>
     </li>
   </ul>
 
-  <div class="doc" *ngIf="showDocPanel && !isClosed">
+  <div class="doc" *ngIf="showDocPanel">
     <ng-content></ng-content>
   </div>
 </div>
