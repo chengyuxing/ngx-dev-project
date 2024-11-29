@@ -1,11 +1,16 @@
 # Change notes
 
+## 1.0.8
+
+- Add click icon.
+
 ## 1.0.7
 
 - Some optimized.
 - Remove minimized.
 
 ## 1.0.6
+
 - Update datasource when on changes.
 
 ## 1.0.5

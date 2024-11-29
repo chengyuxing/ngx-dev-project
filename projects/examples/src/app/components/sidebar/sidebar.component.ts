@@ -12,7 +12,6 @@ import {IMenuItem} from "../../../../../ngx-menubar/src/lib/cyx-menubar.componen
           [iconParser]="parseSvfIcon"
           [showDocPanel]="true"
           [color]="'dark'"
-          [active]="51"
           (itemClick)="clickItem($event)">
           {{ menubar.selectedItem | json }}
           <div>

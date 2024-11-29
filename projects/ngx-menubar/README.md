@@ -94,6 +94,7 @@ export class AppComponent {
 | @Input() [iconParser](#IconParser): Function         | (icon: string) => icon        | Parse icon which from menu item data field `IMenuItem#icon`. |
 | @Input() searchConfig: [SearchConfig](#SearchConfig) | [{...}](#DefaultSearchConfig) | Global menu item search configuration.                       |
 | @Output() itemClick: EventEmitter&lt;IMenuItem&gt;   |                               | Menu item click event.                                       |
+| @Output() close: EventEmitter                        |                               | Close icon click event.                                      |
 
 ## Properties
 
@@ -145,7 +146,7 @@ export interface SearchConfig {
 
 ```typescript
 {
-  placeHolder: 'search', 
+  placeHolder: 'search',
   predicate: (keyword, item) => item.title.toLowerCase().includes(keyword.toLowerCase())
 }
 ```
